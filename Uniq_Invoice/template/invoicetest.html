@@ -1,0 +1,450 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+        
+      
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Invoice</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard
+                                            </a></li>
+                                        <li class="breadcrumb-item active">Transaction</li>
+                                        <li class="breadcrumb-item active">Invoice</li>
+                                    </ol>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+
+
+
+
+                                <div class="row">
+                                    <div class="col">
+            
+                                        <div class="h-100">
+                                            <div class="row mb-3 pb-1">
+                                                <div class="col-12">
+                                                    <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+            
+            
+                                                    </div><!-- end card header -->
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                            <form method="POST" action="/invoice_file/">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-lg-10 offset-1 ">
+                                                        <div class="card" style="padding:25px;">
+                                                            <div class="card-header align-items-center d-flex">
+                                                                <h1 class="card-title mb-0 flex-grow-1"><center>INVOICE</center></h1>
+                
+                                                            </div><!-- end card header -->
+                                                            <div class="card-body">
+                                                                <div class="live-preview">
+                                                                    <div class="row gy-4">
+                
+                                                                        <div class="col-xxl-12 col-md-6">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded" class="form-label">
+                                                                                    Invoice Number : </label>
+                                                                                <input type="text" class="form-control rounded-pill"
+                                                                                    name="Invoice_Number" value = "{{Invoice_no}}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xxl-6 col-md-6">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded" class="form-label">
+                                                                                    Invoice Date : </label>
+                                                                                <input type="date" class="form-control rounded-pill" id="date" name="date">
+
+                                                                                <!-- <input type="date" class="form-control rounded-pill"
+                                                                                     name="Invoice_Date" value="{{d1}}"> -->
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xxl-6 col-md-6">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded"
+                                                                                    class="form-label">Invoice Due Date : </label>
+                                                                                <input type="date" class="form-control rounded-pill"
+                                                                                     name="Invoice_Due_Date" id = "duedate" 
+                                                                                    >
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-xxl-6 col-md-6">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded"
+                                                                                    class="form-label">PO : </label>
+                                                                                <input type="text" class="form-control rounded-pill"
+                                                                                     name="Po"
+                                                                                    >
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xxl-6 col-md-3">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded"
+                                                                                    class="form-label">Dealer/Customer: </label>
+                                                                                
+                                                                                <br>
+                                                                                <INPUT TYPE='radio' NAME='grp2' VALUE='City0' onClick="javascript:return yourfunction(1)" checked>&nbsp;<b>Dealer</b>
+                                                                                    &nbsp;
+                                                                                <INPUT TYPE='radio' NAME='grp2' VALUE='City1' onClick="javascript:return yourfunction(2)">&nbsp;<b>Customer</b>
+                                                                            </div>
+                                                                        </div>
+                                                                       
+                                                                        
+                                                                        <div class="col-xxl-6 col-md-3">
+                                                                            <br>
+                                                                            <div>
+                                                                                
+                                                                                <div id = "one" > 
+
+                                                                        
+                                                                                    <select name="school" id="12" class="form-control">
+                                                                                        {% for x in alldealer %} 
+                                                                                            <option value='1' ><b> {{x}}</b></option>
+                                                                                        {% endfor %}
+                                                                                    </select>
+        
+                                                                                </div>
+        
+        
+                                                                                <div id = "two" style = "display:none ;" >
+                                                                                
+                                                                                    <select name="school" id="23" class="form-control">
+                                                                                        {% for x in allcustomer %} 
+                                                                                            <option value='1' ><b>{{x}}</b> </option>
+                                                                                        {% endfor %}
+        
+        
+                                                                                    </select>
+                                                                                </div>
+        
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <br>
+                                                                        <br>
+                                                                        <div class="col-xxl-6 col-md-3">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded"
+                                                                                    class="form-label">Invoice Type :</label>&nbsp;&nbsp;
+                                                                                <input type="checkbox" 
+                                                                                     name="Invoice_Type"
+                                                                                    >
+                                                                                <label>Actual Invoice</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-xxl-6 col-md-6">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded"
+                                                                                    class="form-label">Dealer Information :</label>
+                                                                                <input type="number" class="form-control rounded-pill"
+                                                                                     name="Dealer_information"
+                                                                                    >
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xxl-6 col-md-6">
+                                                                            <div>
+                                                                                <label for="exampleInputrounded"
+                                                                                    class="form-label"> Company Information</label>
+                                                                                <input type="number" class="form-control rounded-pill"
+                                                                                     name="Invoice_Type"
+                                                                                    >
+                                                                            </div>
+                                                                        </div>
+                                                                     
+                                                                        <div id="POItablediv">
+                                                                            
+                                                                            <table id="invoiceitemable"  class="table table-striped table-bordered table-sm" border="1" >
+                                                                                
+                                                                                <tbody>
+                                                                                    <tr border="1">
+                                                                                        <th style="width:2%">Item Name</th>
+                                                                                        <th style="width:10%">Item Name</th>
+                                                                                        <th style="width:10%">Item Description</th>
+                                                                                        <th style="width:10%">Model Name</th>
+                                                                                        <th style="width:10%">AMP</th>
+                                                                                        <th style="width:10%">Avilable Quantity</th>
+                                                                                        <th style="width:10%">Quantity</th>
+                                                                                        <th style="width:10%">Amount</th>
+                                                                                        <th style="width:10%">Total</th>
+                                                                                        <th style="width:10%">Delete</th>
+                                                                                        <th style="width:10%">Add</th>
+                                                                                    </tr>
+                                                                                    
+                                                                                    <tr border="1" >
+                                                                                        <td><input size=15 type="text" id="0" /></td>
+                                                                                        <td size = 25 id ="1">
+                                                                                            <select>
+                                                                                                {% for x in tid %} 
+                                                                                                <option value='' ><b> {{x.item_name}}</b></option>
+                                                                                                {% endfor %}
+                                                                                            </select>
+                                                                                        </td>
+                                                                                        
+                                                                                        <td><input size=15 type="text" id="2" value="dhfg"/></td>
+                                                                                        <td><input size=15 type="text" id="3" /></td>
+                                                                                        <td><input size=15 type="text" id="4" /></td>
+                                                                                        <td><input size=15 type="text" id="5" /></td>
+                                                                                        <td><input size=15 type="text" id="6" /></td>
+                                                                                        <td><input size=10 type="text" id="7" /></td>
+                                                                                        <td><input size=10 type="text" id="8" /></td>
+                                                                                        <td><center><input type="button" id="delPOIbutton" value=" - " onclick="deleteRow(this)" /></center></td>
+                                                                                        <td><center><input type="button" id="invoiceitemable" value=" + " onclick="invoiceaddroe()" /></center></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        
+                
+                                                                        <br>
+                                                                        <br>
+                                                                        <div class="col-md-4 offset-8">
+                                                                            <table class="table table-striped table-bordered table-sm" style="width: 400px; float: right !important;">
+                                                                                <tbody>
+                                                                                <tr>    
+                                                                                    <th>SGST (9 %):</th>
+                                                                                    <td>1000</td>
+                                                                                </tr>
+                                                                                <tr>    
+                                                                                    <th>CGST (9 %):</th>
+                                                                                    <td>1000</td>
+                                                                                </tr>
+                                                                                <tr>    
+                                                                                    <th>Total Bil Amount :</th>
+                                                                                    <td>1000</td>
+                                                                                </tr>
+                                                                            
+                                                                            </tbody>
+                                                                            </table>
+                                                                            </div>
+
+                                                                        
+                                                                        
+                                                                    </div>
+   
+                                                                </div>
+                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <!--end col-->
+                                        </div>
+                                        <!-- <center><a href="{%url 'UniQInvoice:dealercanwatch'%}"><button class="btn btn-primary" name="cancel"> cancel </button></a></center> -->
+                                        <script
+                                            src="http://code.jquery.com/jquery-3.5.1.min.js"
+                                            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+                                            crossorigin="anonymous">
+                                        </script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+                                        <script>
+                                            function yourfunction(radioid)
+                                        {
+                                        if(radioid == 0)
+                                        {
+                                            document.getElementById('one').style.display = '';
+                                            document.getElementById('two').style.display = 'none'; 
+                                        }
+                                        else if(radioid == 1)
+                                        {    
+                                            document.getElementById('one').style.display = '';
+                                            document.getElementById('two').style.display = 'none';
+
+                                        }
+                                        else if(radioid == 2)
+                                        {  
+                                            
+                                            document.getElementById('two').style.display = '';
+                                            document.getElementById('one').style.display = 'none';
+                                        }
+
+                                        }
+                                        </script>
+                                        <script>
+                                            $(document).ready(function(){
+                                        
+                                                // Initialize select2
+                                                $("#12").select2();
+                                            
+                                                // Read selected option
+                                            
+                                            });
+                                            $(document).ready(function(){
+                                        
+                                                // Initialize select2
+                                                $("#23").select2();
+                                            
+                                                // Read selected option
+                                            
+                                            });
+                                            
+                                        </script>
+                                        <!-- <script>
+                                            function deleteRow(rowid)  
+                                            {   
+                                                var row = document.getElementById(rowid);
+                                                var table = row.parentNode;
+                                                while ( table && table.tagName != 'TABLE' )
+                                                    table = table.parentNode;
+                                                if ( !table )
+                                                    return;
+                                                table.deleteRow(row.rowIndex);
+                                            }
+                                        </script> -->
+                                          
+                                         <script>
+                                            function deleteRow(row) {
+
+
+                                                $("#deleteRow").click(function (){
+                                                    $("#tblTradesman").each(function(){
+                                                        if($('tbody', this).length > 1){
+                                                            $('tbody tr:last', this).remove();
+                                                        }else {
+                                                            alert("please first add new item")
+                                                        }
+                                                    });
+                                                });	
+
+
+                                                var i = row.parentNode.parentNode.rowIndex;
+                                                document.getElementById('invoiceitemable').deleteRow(i !=1, i !=2);
+                                              }
+                                              
+                                            function insRow() {
+                                            console.log('hi');
+                                            var x = document.getElementById('invoiceitemable');
+                                            var new_row = x.rows[1].cloneNode(true);
+                                            var len = x.rows.length;
+                                            new_row.cells[0].innerHTML = len;
+                                            
+                                            var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+                                            inp1.id += len;
+                                            inp1.value = '';
+                                            var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
+                                            inp2.id += len;
+                                            inp2.value = '';
+                                            x.appendChild(new_row);
+                                            
+                                            }
+                                        </script>  
+                                        <!-- <script>
+                                            $(function(){
+  
+                                                for(var i=0;i<3;i++){
+                                                   var trd="";
+                                                trd +="<tr>";
+                                                trd +="<td>";
+                                                trd+="<select class='input-small'>{% for x in tid %} <option value='1' ><b>{{x.item_name}}</b> </option>{% endfor %}";
+                                                trd+="</td>";
+                                                
+                                                trd+="</tr>";
+                                                     $(".table-bordered tbody").append(trd); 
+                                                }
+                                                
+                                               
+                                                
+                                            });
+                                        </script> -->
+<!--                                         
+                                        <script>
+                                            function invoiceaddroe() {
+                                              var table = document.getElementById("invoiceitemable");
+                                              var row = table.insertRow(1);
+                                              var cell1 = row.insertCell(0);
+                                              var cell2 = row.insertCell(1);
+                                              
+                                              var cell3 = row.insertCell(2);
+                                              var cell4 = row.insertCell(3);
+                                              var cell5 = row.insertCell(4);
+                                              var cell6 = row.insertCell(5);
+                                              var cell7 = row.insertCell(6);
+                                              var cell8 = row.insertCell(7);
+                                              var cell9 = row.insertCell(8);
+                                           
+                                              cell1.innerHTML = "NEW CELL1";
+                                              cell2.innerHTML = "NEW CELL2";
+                                              cell3.innerHTML = "NEW CELL3";
+                                              cell4.innerHTML = "NEW CELL4";
+                                              cell5.innerHTML = "NEW CELL5";
+                                              cell6.innerHTML = "NEW CELL6";
+                                              cell7.innerHTML = "NEW CELL7";
+                                              cell8.innerHTML = "NEW CELL8";
+                                              
+                                            }
+                                        </script> -->
+                                        
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
+                                    
+
+
+                                        <!--date-->
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <script>
+                                            $('#date').val(new Date().toJSON().slice(0,10));
+                                           
+                                        </script>
+                                        
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+            
+                                    </div> <!-- end .h-100-->
+            
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+{% endblock %}

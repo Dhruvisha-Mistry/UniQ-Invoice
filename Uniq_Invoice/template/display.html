@@ -1,0 +1,63 @@
+<html>
+    <head>
+      <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        </style>
+        <body>
+        <hr>
+        <center><h2>Item Data</h2></center>
+        <hr>
+    <body>
+      <center>
+        <table>
+            <tr>
+              <th style="width:4%">Warehouse Id</th>
+              <th style="width:5%">Item Name</th>
+              <th style="width:5%">Item Description</th>
+              <th style="width:5%">Model Name</th>
+              <th style="width:8%">Manufecture Date</th>
+              <th style="width:8%">Receiving Data</th>
+              <th style="width:5%">D P Price</th>
+              <th style="width:5%"> M R P</th>
+              <th style="width:10%">Battery Type</th>
+              <th style="width:5%">Ampear</th>
+              <th style="width:4%">Quantity</th>
+              <th style="width:8%" colspan="2">Action</th>
+            </tr>
+            {% for i in tid %}
+                <tr>
+                <td>{{i.warehouse_id}}</td>
+                <td>{{i.item_name}}</td>
+                <td>{{i.item_description}}</td>
+                <td>{{i.model_name}}</td>
+                <td>{{i.manufecture_date}}</td>
+                <td>{{i.receiving_data}}</td>
+                <td>{{i.DP_price}}</td>
+                <td>{{i.MRP}}</td>
+                <td>{{i.Battery_type}}</td>
+                <td>{{i.Ampear}}</td>
+                <td>{{i.Quantity}}</td> 
+                <td><a href="{% url 'ItemMaster:itemedit' pk=i.id  %} " ><button type="button" class="btn btn-primary">Edit</button></a></td>
+                <td><a onclick="return confirm( 'Are You sure You Want To Delete ??');" href="{% url 'ItemMaster:itemdelete' pk=i.id %}"><button type="button" class="btn btn-warning">Delete</button></a></td>
+                </tr>
+           {% endfor%}
+          </table>
+          <br>
+          <br><a href="{% url 'ItemMaster:add_item' %}" ><button type="submit" class="registerbtn"> Item add</button></a>
+
+
+
+          {% comment %} <br><a href="{% url 'logout' %}" ><button type="button" >Logout</button></a> {% endcomment %}
+        </center>
+        </body>
+
+
+</html>

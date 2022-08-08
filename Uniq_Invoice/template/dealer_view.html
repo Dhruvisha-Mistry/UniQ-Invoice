@@ -1,0 +1,179 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+       
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">DEALER MASTER</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">DEALER MASTER </a>
+                                        </li>
+                                        <li class="breadcrumb-item active">DEALER MASTER </li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <div class="row">
+                                    <div class="col-lg-12  ">
+                                        <a href="{%url 'UniQInvoice:add_Dealer_Master'%}"><button type="button" class="btn btn-primary" style="float:right "> + Add New Dealer</button></a>
+                                        
+                                    
+                                    </div>
+                                                             
+                                    <div class="col-lg-12 mt-3" >
+                                        <div class="card" id="tasksList">
+                                            <div class="card-header border-0">
+                                                <div class="d-flex align-items-center">
+                                                    <h5 class="card-title mb-0 flex-grow-1">All Tasks</h5>
+                                              
+                                                </div>
+                                            </div>
+                                            <div class="card-body border border-dashed border-end-0 border-start-0">
+                                                <form>
+                                                    <div class="row g-3">
+                                                        <div class="col-xxl-4 col-sm-12">
+                                                            <div class="search-box">
+                                                                <input type="text"
+                                                                    class="form-control search bg-light border-light"
+                                                                    placeholder="Search for tasks or something...">
+                                                                <i class="ri-search-line search-icon"></i>
+                                                            </div>
+                                                        </div>
+       
+                                                    </div>
+                                                    <!--end row-->
+                                                </form>
+                                            </div>
+                                            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                                            <!-- <script>
+                                                {% for msg in mssages %}
+                                                    swal('{{msg}}');
+                                                {% endfor %}
+                                                
+                                            </script> -->
+                                            <!--end card-body-->
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card mb-4">
+                                                    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr align="center">
+                                                                <th style="width:10%"> Company_name</th>
+                                                                <th style="width:10%"> Name</th>
+                                                                <th style="width:10%"> Address</th>
+                                                                <th style="width:10%">Gst Number</th>
+                                                                <th style="width:10%"> Email Address</th>
+                                                                <th style="width:10%"> Phone Number</th>
+                                                                <th style="width:10%"> Office Number</th>
+                                                                <th style="width:10%">UPDATE</th>
+                                                                <th style="width:10%">DELETE</th>
+                                                            </tr>
+                                                            
+                                                        </thead>
+                                                        <tbody>
+
+                                                            {% for i in alldealer %}
+                                                                <tr>
+                                                                <td>{{i.dealer_company_name}}</td>
+                                                                <td>{{i.dealre_name}}</td>
+                                                                <td>{{i.dealer_address}}</td>
+                                                                <td>{{i.gst_number}}</td>
+                                                                <td>{{i.dealer_email_address}}</td>
+                                                                <td>{{i.dealer_phone_number}}</td>
+                                                                <td>{{i.dealer_office_number}}</td>
+                                                                <td align="center"><a href="/select_Dealer_Master/{{i.id}}"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+                                                                <td align="center"><a href="/delete_Dealer_Master/{{i.id}}" onclick="myfunction()"><i class="fa fa-trash" aria-hidden="true"></i> </a></td>
+                                                                
+                                                                
+                                                            
+                                                                
+                                                             {% endfor%}
+                                                        </tbody>
+                                    
+                                                      </table>
+                                                    
+                                                    <!--end table-->
+
+                                                    
+                                                    <div class="noresult" style="display: none;">
+                                                        <div class="text-center">
+                                                            <lord-icon src=""
+                                                                trigger="loop"
+                                                                colors="primary:#121331,secondary:#08a88a"
+                                                                style="width:75px;height:75px"></lord-icon>
+                                                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                            <p class="text-muted mb-0">We've searched more than 200k+
+                                                                tasks We did not find any tasks for you search.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end mt-2">
+                                                    <div class="pagination-wrap hstack gap-2" style="display: none;">
+                                                        <a class="page-item pagination-prev disabled" href="#">
+                                                            Previous
+                                                        </a>
+                                                        <ul class="pagination listjs-pagination mb-0">
+                                                            <li class="active"><a class="page" href="#" data-i="1"
+                                                                    data-page="8">1</a></li>
+                                                        </ul>
+                                                        <a class="page-item pagination-next disabled" href="#">
+                                                            Next
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end card-body-->
+                                        </div>
+                                        <!--end card-->
+                                    </div>
+                        
+
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+{% endblock %}

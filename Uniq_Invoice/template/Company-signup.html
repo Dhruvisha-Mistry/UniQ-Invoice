@@ -1,0 +1,214 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none">
+
+
+<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Jul 2022 07:56:59 GMT -->
+<head>
+    <style>
+        .required:after {
+          content:" *";
+          color: red;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <title>Sign In | Velzon - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+    <!-- Layout config Js -->
+    <script src="{% static 'js/layout.js' %}"></script>
+    <!-- Bootstrap Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{% static 'css/app.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{% static 'css/custom.min.css' %}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <div class="auth-page-wrapper pt-5">
+        <!-- auth page bg -->
+        <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
+            <div class="bg-overlay"></div>
+
+            <div class="shape">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
+                    <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- auth page content -->
+        <div class="auth-page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mt-sm-5 mb-4 text-white-50">
+                            <div>
+                                <a href="index.html" class="d-inline-block auth-logo">
+                                    <img src="{% static 'images/logosocial.png' %}" alt="" height="150">
+                                </a>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+                        <div class="card mt-4">
+
+                            <div class="card-body p-4">
+                                <div class="text-center mt-2">
+                                    <h2 class="text-primary"><b>Company Registration</b></h2>
+                                    <!-- <p class="text-muted">Sign in to continue to UniQ.</p> -->
+                                </div>
+                                <div class="p-2 mt-4">
+                                    <form method = "POST" action="/">
+                                        {% csrf_token %}
+                                        <p><b><h5>IMPORTANT : * Are Required Fields</h5></b></p><br>
+                                        <div class="row gy-4">
+                                                        
+                                            <div class="col-xxl-6 col-md-6">
+                                                 <div>
+                                                     <label for="exampleInputrounded" class="required"> Company Name: </label>
+                                                     <input type="text" name = "Company_Name" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Company Name" required>
+                                                 </div>
+                                             </div>
+                                             <div class="col-xxl-6 col-md-6">
+                                                <div>
+                                                    <label for="exampleInputrounded" class="required"> Owner Name : </label>
+                                                    <input type="text" name = "Owner_Name" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Name" required>
+                                                </div>
+                                            </div>
+                                        
+                                             <div class="col-xxl-6 col-md-6">
+                                                <div>
+                                                    <label for="exampleInputrounded" class="required"> GST Number : </label>
+                                                    <input type="text" name = "GST_Number" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your GST Number" required>
+                                                </div>
+                                                {% if g_msg %}
+                                                <div style = "color:red"  class="alert alert-danger" role="alert">
+                                                {{g_msg}}
+                                                </div>
+                                                {% endif %}
+                                             </div>
+                                             
+                                             <div class="col-xxl-6 col-md-6">
+                                                 <div>
+                                                     <label for="exampleInputrounded" class="required"> Company Address : </label>
+                                                     <input type="text" name = "Address" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Address" required>
+                                                 </div>
+                                             </div>
+                                             <div class="col-xxl-6 col-md-6">
+                                                 <div>
+                                                     <label for="exampleInputrounded" class="required"> Email ID : </label>
+                                                     <input type="email" name = "Email_Address" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Email" required>
+                                                 </div>
+                                                 {% if e_msg %}
+                                                 <div style = "color:red"  class="alert alert-danger" role="alert">
+                                                 {{e_msg}}
+                                                 </div>
+                                                 {% endif %}
+                                             </div>
+                                            
+                                             
+                                             <div class="col-xxl-6 col-md-6">
+                                                <div>
+                                                    <label for="exampleInputrounded" class="required"> Mobile Number : </label>
+                                                    <input type="text" name = "Phone_Number" maxlength="10" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Number" required>
+                                                </div>
+                                                {% if m_msg %}
+                                                <div style = "color:red"  class="alert alert-danger" role="alert">
+                                                {{m_msg}}
+                                                </div>
+                                                {% endif %}
+                                             </div>
+                                             
+
+                                             <div class="col-xxl-6 col-md-6">
+                                                 <div>
+                                                     <label for="exampleInputrounded" class="required"> Office Number</label>
+                                                     <input type="text" maxlength = "10" name = "Office_Number" class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Office Number" required>
+                                                 </div>
+                                             </div>
+                                             <div class="col-xxl-6 col-md-6">
+                                                <div>
+                                                    <label for="exampleInputrounded"> Company Website URL : </label>
+                                                    <input type="text"  name = "Company_website"class="form-control rounded-pill" id="exampleInputrounded" placeholder="Enter your Website" required>
+                                                </div>
+                                            </div>
+                                         </div>
+
+                                  
+
+                                        <div class="mt-4">
+                                            <center><button class="btn btn-success w-20" type="submit">Submit</button></center>
+                                        </div>
+
+                                        <center><span ><h4style="color:green;">{{success_msg}}</h4></span></center>
+                                   
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                        <div class="mt-4 text-center">
+                            <p class="mb-0">Already have an account ? <a href="{%url 'UniQInvoice:companylogin' %}" class="fw-semibold text-primary text-decoration-underline"> Signin </a> </p>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end auth page content -->
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <p class="mb-0 text-muted">&copy;
+                                <script>document.write(new Date().getFullYear())</script>  Uniq data Solution Private Limited.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+    </div>
+    <!-- end auth-page-wrapper -->
+
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'js/pages/plugins/lord-icon-2.1.0.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+
+    <!-- particles js -->
+    <script src="{% static 'libs/particles.js/particles.js' %}"></script>
+    <!-- particles app js -->
+    <script src="{% static 'js/pages/particles.app.js' %}"></script>
+    <!-- password-addon init -->
+    <script src="{% static 'js/pages/password-addon.init.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Jul 2022 07:57:00 GMT -->
+</html>

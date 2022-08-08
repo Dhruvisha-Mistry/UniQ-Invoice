@@ -1,0 +1,268 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">invoice</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">invoice</a>
+                                        </li>
+                                        <li class="breadcrumb-item active">invoice </li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+  
+                                <div class="row">
+                                                    
+                                    <div class="col-lg-12 mt-3" >
+                                        <div class="card" id="tasksList">
+                                            
+                                            <div class="card-body border border-dashed border-end-0 border-start-0">
+            
+
+                                                <!-- <b><p style="float:left ">Current Date : {{d1}} <p style="float:right">Due Date : {{due_date}}</p></b></p></b> -->
+                                                <div class="col-xxl-6 col-md-6">
+                                                    <div>
+                                                        <label for="exampleInputrounded" class="form-label">
+                                                            Invoice Date : </label>
+                                                            <input type="date" name = "date" id = "date" >
+                                                        <!-- <input type="date" class="form-control rounded-pill" id="date" name="date" onchange="myChangeFunction(this)"> -->
+
+
+                                                        <!-- <input type="date" class="form-control rounded-pill"
+                                                             name="Invoice_Date" value="{{d1}}"> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-6 col-md-6">
+                                                    <div>
+                                                        <label for="exampleInputrounded"
+                                                            class="form-label" >Invoice Due Date : </label>
+                                                        <input type="text" id =  "date" class="form-control rounded-pill" onchange="javascript:var chooseDate=(date.value)+15;"
+                                                             name="Invoice_Due_Date" disabled>
+                                                            
+                                                    </div>
+                                                </div>
+                                                <center>
+                                                    <div style="min-width: 5px;">
+                                                    <br><label><b>Please select</b> </label>
+                                                    
+                                                    <b>Dealer/Customer</b> 
+                                                    <INPUT TYPE='radio' NAME='grp2' VALUE='City0' onClick="javascript:return yourfunction(1)">&nbsp;<b>Dealer</b>
+                                                        &nbsp;
+                                                    <INPUT TYPE='radio' NAME='grp2' VALUE='City1' onClick="javascript:return yourfunction(2)">&nbsp;<b>Customer</b>
+
+                                     
+
+                                                    <div id = "one" style = "display:none; max-width: 150px"> 
+
+                                                    
+                                                        <select name="school" id="12">
+                                                            {% for x in alldealer %} 
+                                                                <option value='1' ><b> {{x}}</b></option>
+                                                            {% endfor %}
+                                                        </select>
+
+                                                    </div>
+
+
+                                                    <div id = "two" style = "display:none ; max-width: 150px;">
+                                                    
+                                                        <select name="school" id="23">
+                                                            {% for x in allcustomer %} 
+                                                                <option value='1' ><b>{{x}}</b> </option>
+                                                            {% endfor %}
+
+
+                                                        </select>
+                                                    </div>
+                                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                                    <script>
+                                                        $('#date').val(new Date().toJSON().slice(0,10));    
+                                                    </script>
+
+                                                    <!-- <input type="date" name = "date" id = "date" onchange="" > -->
+                                                    <!-- var chooseDate=new Date(this.value);
+                                                    chooseDate.setDate(chooseDate.getUTCDate()+7);
+                                                    var futureDate=chooseDate.getFullYear()+'-'+('0'+(chooseDate.getMonth()+1)).slice(-2)+'-'+('0'+(chooseDate.getDate())).slice(-2);alert('7 days later will be '+futureDate); -->
+                                                    <script type="text/javascript">
+                                                        function myChangeFunction(input1) {
+                                                          var input2 = document.getElementById('myInput2');
+                                                          input2.value = input1.value;
+                                                          
+                                                          var input1=new Date(this.value);
+                                                          input1.setDate(input1.getUTCDate()+15);
+                                                          console.log(input1)
+
+                                                          input2.value = input1.getFullYear()+'-'+('0'+(input1.getMonth()+1)).slice(-2)+'-'+('0'+(input1.getDate())).slice(-2);
+                                                        }
+                                                      </script>
+                                                    <!-- <script>
+                                                        var chooseDate=new Date(this.value);
+                                                        chooseDate.setDate(chooseDate.getDate()+7);
+                                                        alert('7 days later will be '+chooseDate);
+                                                    </script> -->
+                                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+                                                    <script>
+                                                        function yourfunction(radioid)
+                                                    {
+                                                    if(radioid == 1)
+                                                    {    
+                                                        document.getElementById('one').style.display = '';
+                                                        document.getElementById('two').style.display = 'none';
+
+                                                    }
+                                                    else if(radioid == 2)
+                                                    {  
+                                                        
+                                                        document.getElementById('two').style.display = '';
+                                                        document.getElementById('one').style.display = 'none';
+                                                    }
+
+                                                    }
+                                                    </script>
+                                                    <script>
+                                                        $(document).ready(function(){
+                                                    
+                                                            // Initialize select2
+                                                            $("#12").select2();
+                                                        
+                                                            // Read selected option
+                                                        
+                                                        });
+                                                        $(document).ready(function(){
+                                                    
+                                                            // Initialize select2
+                                                            $("#23").select2();
+                                                        
+                                                            // Read selected option
+                                                        
+                                                        });
+                                                        
+                                                    </script>
+                                                </div>
+
+                                                </center>
+                                                <label>Dealer Name</label><br>
+                                                <label>Dealer Company Name</label><br>
+                                                <label>Dealer GST No</label><br>
+                                                <label>Dealer Email</label><br>
+                                                <label>Dealer Mobile No</label><br>
+                                                <label>Dealer Address</label><br>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card mb-4">
+                                                    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr align="center">
+                                                                <th style="width:10%">Dealer Company_name</th>
+                                                                <th style="width:10%">Dealre Name</th>
+                                                                <th style="width:10%">Dealer Address</th>
+                                                                <th style="width:10%">Gst Number</th>
+                                                                <th style="width:10%">Dealer Email Address</th>
+                                                                <th style="width:10%">Dealer Phone Number</th>
+                                                                <th style="width:10%">Dealer Office Number</th>
+                                                                <th style="width:10%">UPDATE</th>
+                                                                <th style="width:10%">DELETE</th>
+                                                            </tr>
+                                                            
+                                                        </thead>
+                                                        <tbody>
+
+                                                            {% for i in alldealer %}
+                                                                <tr>
+                                                                <td>{{i.dealer_company_name}}</td>
+                                                                <td>{{i.dealre_name}}</td>
+                                                                <td>{{i.dealer_address}}</td>
+                                                                <td>{{i.gst_number}}</td>
+                                                                <td>{{i.dealer_email_address}}</td>
+                                                                <td>{{i.dealer_phone_number}}</td>
+                                                                <td>{{i.dealer_office_number}}</td>
+                                                                <td align="center"><a href="/select_Dealer_Master/{{i.id}}"><i class="fa fa-refresh" aria-hidden="true"></i></a></td>
+                                                                <td align="center"><a href="/delete_Dealer_Master/{{i.id}}" onclick="return confirm('Are You sure You Want To Delete ??');" ><i class="fa fa-trash" aria-hidden="true"></i> </a></td>
+                                                                
+                                                                
+                                                            
+                                                                
+                                                             {% endfor%}
+                                                        </tbody>
+                                    
+                                                      </table>
+                                                    
+                                                    <!--end table-->
+                                                    <div class="noresult" style="display: none;">
+                                                        <div class="text-center">
+                                                            <lord-icon src=""
+                                                                trigger="loop"
+                                                                colors="primary:#121331,secondary:#08a88a"
+                                                                style="width:75px;height:75px"></lord-icon>
+                                                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                            <p class="text-muted mb-0">We've searched more than 200k+
+                                                                tasks We did not find any tasks for you search.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end mt-2">
+                                                    <div class="pagination-wrap hstack gap-2" style="display: none;">
+                                                        <a class="page-item pagination-prev disabled" href="#">
+                                                            Previous
+                                                        </a>
+                                                        <ul class="pagination listjs-pagination mb-0">
+                                                            <li class="active"><a class="page" href="#" data-i="1"
+                                                                    data-page="8">1</a></li>
+                                                        </ul>
+                                                        <a class="page-item pagination-next disabled" href="#">
+                                                            Next
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <script
+                                                    src="http://code.jquery.com/jquery-3.5.1.min.js"
+                                                    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+                                                    crossorigin="anonymous">
+                                                </script>
+
+                                                <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+                                                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
+                                                
+
+                                                
+                                            </div>
+                                            <!--end card-body-->
+                                        </div>
+                                        <!--end card-->
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+                        </div> <!-- end .h-100-->
+                    </div> 
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,439 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Warehouse Master</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Warehouse Master </a>
+                                        </li>
+                                        <li class="breadcrumb-item active">Warehouse Master </li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <div class="row">
+                                    <div class="col-lg-12  ">
+                                        <div class="card" style="padding:25px;">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h1 class="card-title mb-0 flex-grow-1"> Warehouse Master </h1>
+
+                                            </div><!-- end card header -->
+                                        <form  name="warehoseForm" method="POST" onsubmit="return validateForm()" action="{% url 'ItemMaster:addwarehouse' %}">
+                                                {% csrf_token %}
+                                    
+                                            <div class="card-body">
+                                                <div class="live-preview">
+                                                    <div class="row gy-4">
+
+                                                        <div class="col-xxl-5 col-md-6" >
+                                                            <div id="wname">
+                                                                <!-- <label for="exampleInputrounded" class="form-label">
+                                                                    Warehouse Name: </label> -->
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                     onfocusout="ValidateName()" onkeyup="ValidateName()" name="warehousename"
+                                                                    placeholder="Enter your Warehousename" >
+                                                                <span id="wname1" class="formerror"></span>
+                                                            </div>
+                                                       
+
+                                                        </div>
+
+                                                        <div class="col-xxl-5 col-md-6" >
+                                                            <div id="WAdd">
+                                                                <!-- <label for="exampleInputrounded" class="form-label">
+                                                                    Warehouse Address : </label> -->
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    onfocusout="Validateitmdes()" onkeyup="Validateitmdes()" name="Warehouse_Add"
+                                                                    placeholder="Enter your Warehouse Address" >
+                                                                <span id="wadd1" class="formerror"></span>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <br>
+                                                        <br>
+                                                        <div class="col-xxl-2 col-md-6">
+                                                            <div>
+                                                                <!-- <label for="exampleInputrounded" class="form-label">
+                                                                    Warehouse Address : </label> -->
+                                                                    <div class="flex-shrink-0">
+                                                                        <button class="btn btn-primary add-btn" data-bs-toggle="modal"
+                                                                            data-bs-target="#showModal"><i
+                                                                                class="ri-add-line align-bottom me-1"></i> Add Warehouse
+                                                                            </button>
+                                                                      
+                                                                    </div>
+                                                        </div>
+                                                       
+
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+
+                                            </div>
+                                        
+                                        </div>
+                                    </form>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="card" id="tasksList">
+                                            <div class="card-header border-0">
+                                                <div class="d-flex align-items-center">
+                                                    <h5 class="card-title mb-0 flex-grow-1">All Tasks</h5>
+                                              
+                                                </div>
+                                            </div>
+                                           
+                                            <!--end card-body-->
+                                            <div class="card-body">
+                                                <div class="table-responsive table-card mb-4">
+                                                    <div class="container">
+                                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Warehouse Name</th>
+                                                                    <th>Warehouse Address</th>
+                                                                    <th>Edit</th>
+                                                                    <th>Delete</th>
+                                                                   
+                                                                </tr>
+                                                            </thead>
+                                                           
+                                                            <tbody>
+                                                                {% for i in wid %}
+                                                                <tr>
+                                                                    <td>{{i.warehouse_name}}</td>
+                                                                    <td>{{i.warehouse_address}}</td>
+                                                                    <!-- <td align="center"><a href="/select_Dealer_Master/{{i.id}}"><i class="fa fa-refresh" aria-hidden="true"></i></a></td> -->
+                                                                    <td><a href="{% url 'ItemMaster:warehouse_edit' pk=i.id  %} " ><i class="fa fa-refresh" aria-hidden="true"></i></a> </td>
+                                                                    <td><a  href="{% url 'ItemMaster:delete_warehouse' i.id %}"  onclick="return confirm( 'Are You sure You Want To Delete ??');" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                                                </tr>
+                                                                {% endfor%}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    
+                                                    <!--end table-->
+                                                    <div class="noresult" style="display: none;">
+                                                        <div class="text-center">
+                                                            <lord-icon src=""
+                                                                trigger="loop"
+                                                                colors="primary:#121331,secondary:#08a88a"
+                                                                style="width:75px;height:75px"></lord-icon>
+                                                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                            <p class="text-muted mb-0">We've searched more than 200k+
+                                                                tasks We did not find any tasks for you search.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-end mt-2">
+                                                    <div class="pagination-wrap hstack gap-2" style="display: none;">
+                                                        <a class="page-item pagination-prev disabled" href="#">
+                                                            Previous
+                                                        </a>
+                                                        <ul class="pagination listjs-pagination mb-0">
+                                                            <li class="active"><a class="page" href="#" data-i="1"
+                                                                    data-page="8">1</a></li>
+                                                        </ul>
+                                                        <a class="page-item pagination-next disabled" href="#">
+                                                            Next
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end card-body-->
+                                        </div>
+                                        <!--end card-->
+                                    </div>
+
+
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        
+    <!-- END layout-wrapper -->
+
+
+
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+    <script>
+        function clearErrors() {
+
+            errors = document.getElementsByClassName('formerror');
+            for (let item of errors) {
+                item.innerHTML = "";
+            }
+    
+    
+        }
+        function seterror(id, error) {
+            //sets error inside tag of id 
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+    
+        }
+        function validateForm() {
+            var returnval = true;
+            clearErrors();
+            var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<sc>\/?]+/;
+            var numberRegex = new RegExp("[0-9]");
+    
+                var iname = document.forms['warehoseForm']["warehousename"].value;
+                if (iname.match(numRegex)) {
+                    seterror("wname", "Special Characters are not allowed");
+                    returnval = false;
+                }
+                var iname = document.forms['warehoseForm']["warehousename"].value;
+                if (iname.match(numberRegex)) {
+                    seterror("wname", "only characters are allowed");
+                    returnval = false;
+                }
+                var iname = document.forms['warehoseForm']["warehousename"].value;
+                if (iname.length > 50) {
+                    seterror("wname", "Input must be less than 50 characters");
+                    returnval = false;
+                }
+    
+                var iname = document.forms['warehoseForm']["warehousename"].value;
+                if (iname.length == "") {
+                    seterror("wname", "This field is required");
+                    returnval = false;
+                }
+              
+                var itemdes = document.forms['warehoseForm']["Warehouse_Add"].value;
+                if (itemdes.length > 100) {
+                    seterror("WAdd", "Input must be less than 100  characters");
+                    returnval = false;
+                }
+                var itemdes = document.forms['warehoseForm']["Warehouse_Add"].value;
+                if (itemdes.length == "") {
+                    seterror("WAdd", "This field is required");
+                    returnval = false;
+                }
+
+                  
+            return returnval;
+        }
+                
+    </script>
+    <script>
+
+        function ValidateName() {
+            var numberRegex = new RegExp("[0-9]");
+            var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+
+            var iname = document.forms['warehoseForm']["warehousename"].value;
+            if (iname.match(numRegex)) {
+                seterror("wname", "Special Characters are not allowed");
+                returnval = false;
+            }
+            else {
+
+                errors = document.getElementById("wname1");
+
+                errors.innerHTML = "";
+
+            }
+
+
+            var iname = document.forms['warehoseForm']["warehousename"].value;
+            if (iname.match(numberRegex)) {
+                seterror("wname", "only characters are allowed");
+                returnval = false;
+            }
+
+
+            var iname = document.forms['warehoseForm']["warehousename"].value;
+            if (iname.length == "") {
+                seterror("wname", "This field is required");
+                returnval = false;
+            }
+
+            var iname = document.forms['warehoseForm']["warehousename"].value;
+            if (iname.length > 50) {
+                seterror("wname", "Input must be less than 50 characters");
+                returnval = false;
+            }
+
+            return returnval;
+        }
+
+    </script>
+
+    <script>
+        function Validateitmdes() {
+            var itemdes = document.forms['warehoseForm']["Warehouse_Add"].value;
+            if (itemdes.length == "") {
+                seterror("WAdd", "This field is required");
+                returnval = false;
+            }
+            else {
+
+                errors = document.getElementById("wadd1");
+
+                errors.innerHTML = "";
+
+            }
+            var itemdes = document.forms['warehoseForm']["Warehouse_Add"].value;
+            if (itemdes.length > 100) {
+                seterror("WAdd", "Input must be less than 100  characters");
+                returnval = false;
+            }
+
+
+            return returnval;
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+           $('#dtOrderExample').DataTable({
+             "order": [[ 3, "desc" ]]
+           });
+             $('.dataTables_length').addClass('bs-select');
+         });
+       </script>
+       <script>
+           
+           $(document).ready(function () {
+               $('#dtBasicExample').DataTable();
+               $('.dataTables_length').addClass('bs-select');
+             });
+       
+       </script>
+   
+       <script>
+   
+           $(document).ready(function () {
+               $('#selectedColumn').DataTable({
+                 "aaSorting": [],
+                 columnDefs: [{
+                 orderable: false,
+                 targets: 3
+                 }]
+               });
+                 $('.dataTables_length').addClass('bs-select');
+             });
+       </script>
+   
+       <script>
+   
+           // Basic example
+           $(document).ready(function () {
+               $('#dtBasicExample').DataTable({
+               "ordering": false // false to disable sorting (or any other option)
+               });
+               $('.dataTables_length').addClass('bs-select');
+           });
+   
+       </script>
+   
+       <script>
+           $(document).ready(function () {
+               $('#dtOrderExample').DataTable({
+                 "order": [[ 3, "desc" ]]
+               });
+                 $('.dataTables_length').addClass('bs-select');
+             });
+       </script>
+   
+       <script>
+           $(document).ready(function() {
+                 $('#dataTable').DataTable();
+           });
+       </script>
+   
+       <script>
+           $(function () {
+               $('#dataTable').DataTable({
+                 "pageLength": 3,
+                 "paging": true,
+                 "lengthChange": false,
+                 "searching": false,
+                 "ordering": true,
+                 "info": true,
+                 "autoWidth": false
+                 });
+             });
+           </script> 
+   
+           <script>
+               $(function () {
+                   $('#dataTable').DataTable({
+                       "ajax": {
+                           "url": "https://reqres.in/api/unknown", /*Data source*/
+                           "dataSrc": "data", /*object that holds the data*/
+                       },
+                       columns: [
+                           { data: 'id' },
+                           { data: 'name' },
+                           { data: 'year' },
+                           { data: 'color' },
+                           { data: 'pantone_value' }
+                       ],
+                       "columnDefs": [{ /* default values for columns */
+                           "defaultContent": "-",
+                           "targets": "_all"
+                       }],
+                   });
+               }); 
+           </script>
+   {% endblock %}

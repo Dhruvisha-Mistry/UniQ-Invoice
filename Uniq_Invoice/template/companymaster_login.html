@@ -1,0 +1,23 @@
+<html>
+    <title>
+        company Login
+    </title>
+    <head>
+        <center>Welcome to login page</center>
+    </head>
+    <body>
+        <form method = "POST" action = "/companylogin/">	
+            {% csrf_token %}
+            <div class="title neonText">Login</div>
+            <input type="email" placeholder="Email/username" class="user-input" name = "email">
+            <input type="password" placeholder="Password" class="user-input" name = "password">
+            {% if msg %}
+                <div style = "color:#fff"class="alert alert-danger" role="alert">
+                {{msg}}
+                </div>
+            {% endif %}
+            <input type="submit" value="Login" class="submit-button">
+        </form>
+    </body>
+
+</html>

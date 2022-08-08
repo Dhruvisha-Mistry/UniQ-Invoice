@@ -1,0 +1,1033 @@
+{% load static %}
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
+    data-sidebar-image="none">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Item Master | UniQ Invoice </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- jsvectormap css -->
+    <link href="{% static 'libs/jsvectormap/css/jsvectormap.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!--Swiper slider css-->
+    <link href="{% static 'libs/swiper/swiper-bundle.min.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- Layout config Js -->
+    <script src="{% static 'js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{% static 'css/app.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="{% static 'css/custom.min.css' %}" rel="stylesheet" type="text/css" />
+<style>
+    .formerror{
+        color:red;
+    }
+</style>
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <header id="page-topbar">
+            <div class="layout-width">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+                        <div class="navbar-brand-box horizontal-logo">
+                            <a href="index.html" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    <img src="assets/images/logosocial.png" alt="" height="22">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="assets/images/logosocial.png" alt="" height="17">
+                                </span>
+                            </a>
+
+                            <a href="index.html" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="assets/images/logosocial.png" alt="" height="22">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="assets/images/logosocial.png" alt="" height="17">
+                                </span>
+                            </a>
+                        </div>
+
+                        <button type="button"
+                            class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                            id="topnav-hamburger-icon">
+                            <span class="hamburger-icon">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </button>
+
+                        <!-- App Search-->
+                  
+                    </div>
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="dropdown d-md-none topbar-head-dropdown header-item">
+                            <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-search fs-22"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                                aria-labelledby="page-header-search-dropdown">
+                                <form class="p-3">
+                                    <div class="form-group m-0">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search ..."
+                                                aria-label="Recipient's username">
+                                            <button class="btn btn-primary" type="submit"><i
+                                                    class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="ms-1 header-item d-none d-sm-flex">
+                            <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                data-toggle="fullscreen">
+                                <i class='bx bx-fullscreen fs-22'></i>
+                            </button>
+                        </div>
+
+                        <div class="ms-1 header-item d-none d-sm-flex">
+                            <button type="button"
+                                class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode">
+                                <i class='bx bx-moon fs-22'></i>
+                            </button>
+                        </div>
+
+
+                        <div class="dropdown ms-sm-3 header-item topbar-user">
+                            <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span class="d-flex align-items-center">
+                                    <img class="rounded-circle header-profile-user"
+                                        src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
+                                    <span class="text-start ms-xl-2">
+                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
+                                            Adame</span>
+                                        <span
+                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                                    </span>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <h6 class="dropdown-header">Welcome Admin!</h6>
+                                <a class="dropdown-item" href="pages-profile.html"><i
+                                        class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Profile</span></a>
+
+                                <a class="dropdown-item" href="pages-faqs.html"><i
+                                        class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Help</span></a>
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href="pages-profile-settings.html"><span
+                                        class="badge bg-soft-success text-success mt-1 float-end"></span><i
+                                        class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Settings</span></a>
+
+                                <a class="dropdown-item" href="auth-logout-basic.html"><i
+                                        class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle" data-key="t-logout">Logout</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ========== App Menu ========== -->
+        <div class="app-menu navbar-menu">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <!-- Dark Logo-->
+                <a href="index.html" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="assets/images/logosocial.png" alt="" height="90">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logosocial.png" alt="" height="90">
+                    </span>
+                </a>
+                <!-- Light Logo-->
+                <a href="index.html" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="assets/images/logosocial-ICON.png" alt="" height="50">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="assets/images/logosocial.png" alt="" height="90">
+                    </span>
+                </a>
+                <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+                    id="vertical-hover">
+                    <i class="ri-record-circle-line"></i>
+                </button>
+            </div>
+
+            <div id="scrollbar">
+                <div class="container-fluid">
+
+                    <div id="two-column-menu">
+                    </div>
+                    <ul class="navbar-nav" id="navbar-nav">
+                        <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
+                                role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                                <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarDashboards">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics"> Menu
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Charts </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                         <!-- end Dashboard Menu -->
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarApps" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarApps">
+                                <i class="ri-apps-2-line"></i> <span data-key="t-apps">Masters</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarApps">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="Dealer-master.html" class="nav-link" data-key="t-sweet-alerts">Dealer
+                                            Master</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link"  data-key="t-nestable-list">Customer</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="Warehouse-Master.html" class="nav-link" data-key="t-scrollbar">Warehouse Master</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="Item-Master.html" class="nav-link" data-key="t-scrollbar">Item Master </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link" data-key="t-scrollbar">Item against Stock entry </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link collapsed active" href="#sidebarAdvanceUI"
+                                data-bs-toggle="collapse" role="button" aria-expanded="true"
+                                aria-controls="sidebarAdvanceUI">
+                                <i class="ri-stack-line"></i> <span data-key="t-advance-ui">Transaction</span>
+                            </a>
+                            <div class="collapse menu-dropdown show" id="sidebarAdvanceUI">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="advance-ui-sweetalerts.html" class="nav-link"
+                                            data-key="t-sweet-alerts">Invoice</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="advance-ui-nestable.html" class="nav-link"
+                                            data-key="t-nestable-list">Purchase Order</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="sidebarLayouts">
+                                <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Reports</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sidebarLayouts">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a href="layouts-horizontal.html" target="_blank" class="nav-link"
+                                            data-key="t-horizontal">Stock Vehicle Type And Model Wise</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="layouts-detached.html" target="_blank" class="nav-link"
+                                            data-key="t-detached">Ledger</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li> 
+                        
+                        <!-- end Dashboard Menu -->
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+
+            <div class="sidebar-background"></div>
+        </div>
+        <!-- Left Sidebar End -->
+
+        
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Item Master </h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Item Master
+                                            </a></li>
+                                        <li class="breadcrumb-item active">Item Master</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <div class="row">
+                                    <div class="col-lg-10 offset-1 ">
+                                        <div class="card" style="padding:25px;">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h1 class="card-title mb-0 flex-grow-1">Item Master Details </h1>
+
+                                            </div><!-- end card header -->
+                                        <form name="itemadd" method="POST" action="{% url 'ItemMaster:add_item' %}"  onsubmit="return validateForm()" >
+                                                {% csrf_token %}
+                                    
+                                            <div class="card-body">
+                                                <div class="live-preview">
+                                                    <div class="row gy-4">
+                                                        <div class="col-lg-12" >
+                                                            <div class="input-group" >
+                                                                <label class="input-group-text" for="inputGroupSelect01">Warehouse</label>
+                                                                <select class="form-select" name="warehousename"  onfocusout="Validatewarehouse()" id="inputGroupSelect01">
+                                                                   {% comment %} <option selected="">Choose...</option> {% endcomment %}
+                                                                    {% for i in  wid %}
+
+                                                                    <option value="{{i.id}}">{{i.warehouse_name}}</option>
+                                                                    
+                                                                    {% endfor %}
+                                                                    
+                                                                </select>
+                                                              
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-xxl-12 col-md-6">
+                                                            <div id="itmname">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    item name: </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" onfocusout="ValidateName()"  name="itemname"
+                                                                    placeholder="Enter your dealer Item name">
+                                                                    <span id="itemname1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="itmdes">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    description </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="itemdescription" onfocusout="Validateitmdes()"
+                                                                    placeholder="Enter your Item description" >
+                                                                    <span id="itmdesc1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="mname">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Model : </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="modelname" onfocusout="ValidatemName()"
+                                                                    placeholder="Enter your Model" >
+                                                                    <span id="mname1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="mdate">
+                                                                <label for="exampleInputrounded" class="form-label">Manufacture date :</label>
+                                                                <input type="date" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="manufectuerdate" onfocusout="ValidatemDate()"
+                                                                    placeholder="Enter your Manufacture date" >
+                                                                    <span id="mdate1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="rdate">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">receiving date  : </label>
+                                                                <input type="Date" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="receivingdate"  onfocusout="ValidaterDate()"
+                                                                    placeholder="Enter your receiving data " >
+                                                                    <span id="rdate1" class="formerror"></span>
+                                                                   
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="dpp">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">DP Price :</label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="dpprice" onfocusout="ValidateDpprice()"
+                                                                    placeholder="Enter Dp Price" >
+                                                                    <span id="dp1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                                                      
+                                                        
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="MRP">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">MRP :</label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="mrp" onfocusout="ValidateMrp()"
+                                                                    placeholder="Enter  MRP (INR)" >
+                                                                    <span id="mrp1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-12 col-md-6">
+                                                            <div id="btry">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    Battery Type: </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="battery" onfocusout="ValidateBattery()"
+                                                                    placeholder="Enter your battery type">
+                                                                    <span id="battery1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="amp">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Ampear :</label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="ampear" onfocusout="ValidateAmpear()"
+                                                                    placeholder="Enter  Ampear" >
+                                                                    <span id="amp1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="qty">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Quentity :</label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="quantity"  onfocusout="ValidateQuantity()"
+                                                                    placeholder="Enter Quentity" >
+                                                                    <span id="qty1" class="formerror"></span>
+                                                            </div>
+                                                         </div>
+                                                         <br>
+                                                        <br>
+                                                        <button class="btn btn-primary" name="submit"> Submit </button>
+
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © UniQ Data Solution Private Limited
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Design & Develop by UniQ Data Solution Private Limited
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+
+    <!--start back-to-top-->
+    <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!--end back-to-top-->
+
+
+
+ 
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'libs/simplebar/simplebar.min.js' %}"></script>
+    <script src="{% static 'libs/node-waves/waves.min.js' %}"></script>
+    <script src="{% static 'libs/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'js/pages/plugins/lord-icon-2.1.0.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+
+    <!-- apexcharts -->
+    <script src="{% static 'libs/apexcharts/apexcharts.min.js' %}"></script>
+
+    <!-- Vector map-->
+    <script src="{% static 'libs/jsvectormap/js/jsvectormap.min.js' %}"></script>
+    <script src="{% static 'libs/jsvectormap/maps/world-merc.js' %}"></script>
+
+    <!--Swiper slider js-->
+    <script src="{% static 'libs/swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Dashboard init -->
+    <script src="{% static 'js/pages/dashboard-ecommerce.init.js' %}"></script>
+
+    <!-- App js -->
+    <script src="{% static 'js/app.js' %}"></script>
+   
+
+
+    <script>
+   
+        function clearErrors() {
+    
+            errors = document.getElementsByClassName('formerror');
+            for (let item of errors) {
+                item.innerHTML = "";
+            }
+    
+    
+        }
+        function seterror(id, error) {
+            //sets error inside tag of id 
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+    
+        }
+        function validateForm() {
+            var returnval = true;
+            clearErrors();
+            var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<sc>\/?]+/;
+            var numberRegex = new RegExp("[0-9]");
+            
+            var iname = document.forms['itemadd']["itemname"].value;
+            if (iname.match(numRegex)) {
+                seterror("itmname", "Special Characters are not allowed");
+                returnval = false;
+            }
+            var iname = document.forms['itemadd']["itemname"].value;
+            if (iname.match(numberRegex)) {
+                seterror("itmname", "only characters are allowed");
+                returnval = false;
+            }
+            var iname = document.forms['itemadd']["itemname"].value;
+            if (iname.length > 20) {
+                seterror("itmname", "Input must be less than 20 characters");
+                returnval = false;
+            }
+
+            var iname = document.forms['itemadd']["itemname"].value;
+            if (iname.length == "") {
+                seterror("itmname", "This field is required");
+                returnval = false;
+            }
+
+            var itemdes = document.forms['itemadd']["itemdescription"].value;
+            if (itemdes.length > 100) {
+                seterror("itmdes", "Input must be less than 100  characters");
+                returnval = false;
+            }
+            var itemdes = document.forms['itemadd']["itemdescription"].value;
+            if (itemdes.length == "") {
+                seterror("itmdes", "This field is required");
+                returnval = false;
+            }
+           
+            var mname = document.forms['itemadd']["modelname"].value;
+            if (mname.match(numRegex)) {
+                seterror("mname", "Special Characters are not allowed");
+                returnval = false;
+            }
+            var mname = document.forms['itemadd']["modelname"].value;
+            if (mname.match(numberRegex)) {
+                seterror("mname", "only characters are allowed");
+                returnval = false;
+            }
+            var mname = document.forms['itemadd']["modelname"].value;
+            if (mname.length > 50) {
+                seterror("mname", "Input must be less than 50 characters");
+                returnval = false;
+            }
+
+            var mname = document.forms['itemadd']["modelname"].value;
+            if (mname.length == "") {
+                seterror("mname", "This field is required");
+                returnval = false;
+            }
+
+               
+
+
+
+            var mdate2 = document.forms['itemadd']["manufectuerdate"].value;
+            if (mdate2.length == "") {
+                seterror("mdate", "This field is required");
+                returnval = false;
+            }
+              
+            var rdate2 = document.forms['itemadd']["receivingdate"].value;
+            if (rdate2.length == "") {
+                seterror("rdate", "This field is required");
+                returnval = false;
+            }
+
+            var Dpprice= document.forms['itemadd']["dpprice"].value;
+    
+            if (Dpprice.length == "") {
+                seterror("dpp", "This field is required");
+                returnval = false;
+            }
+            else if (isNaN(Dpprice)) {
+                seterror("dpp", "only digits are allowed");
+                returnval = false;
+            }
+
+
+            var Mrp = document.forms['itemadd']["mrp"].value;
+
+            if (Mrp.length == "") {
+                seterror("MRP", "This field is required");
+                returnval = false;
+            }
+            else if (isNaN(Mrp)) {
+                seterror("MRP", "only digits are allowed");
+                returnval = false;
+            }
+
+            var Btype = document.forms['itemadd']["battery"].value;
+            if (Btype.length == "") {
+                seterror("btry", "This field is required");
+                returnval = false;
+            }
+            var Btype = document.forms['itemadd']["battery"].value;
+            if (Btype.length > 100) {
+                seterror("btry", "Input must be less than 100  characters");
+                returnval = false;
+            }
+
+            var Ampear = document.forms['itemadd']["ampear"].value;
+
+            if (Ampear.length == "") {
+                seterror("amp", "This field is required");
+                returnval = false;
+            }
+            else if (isNaN(Ampear)) {
+                seterror("amp", "only digits are allowed");
+                returnval = false;
+            }
+
+            var Quantity = document.forms['itemadd']["quantity"].value;
+
+            if (Quantity.length == "") {
+                seterror("qty", "This field is required");
+                returnval = false;
+            }
+            else if (isNaN(Quantity)) {
+                seterror("qty", "only digits are allowed");
+                returnval = false;
+            }
+          
+              
+                return returnval;
+            }
+    
+        </script>
+    
+       
+    
+    
+            <script>
+    
+            function ValidateName() {
+                var numberRegex = new RegExp("[0-9]");
+                var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    
+    
+                var iname = document.forms['itemadd']["itemname"].value;
+                if (iname.match(numRegex)) {
+                    seterror("itmname", "Special Characters are not allowed");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("itemname1");
+    
+                    errors.innerHTML = "";
+    
+                }
+    
+    
+                var iname = document.forms['itemadd']["itemname"].value;
+                if (iname.match(numberRegex)) {
+                    seterror("itmname", "only characters are allowed");
+                    returnval = false;
+                }
+    
+    
+                var iname = document.forms['itemadd']["itemname"].value;
+                if (iname.length == "") {
+                    seterror("itmname", "This field is required");
+                    returnval = false;
+                }
+    
+                var iname = document.forms['itemadd']["itemname"].value;
+                if (iname.length > 20) {
+                    seterror("itmname", "Input must be less than 20 characters");
+                    returnval = false;
+                }
+    
+                return returnval;
+            }
+    
+        </script>
+    
+        <script>
+            function Validateitmdes() {
+                var itemdes = document.forms['itemadd']["itemdescription"].value;
+                if (itemdes.length == "") {
+                    seterror("itmdes", "This field is required");
+                    returnval = false;
+                }
+                
+    
+                else {
+    
+                    errors = document.getElementById("itmdesc1");
+    
+                    errors.innerHTML = "";
+    
+                }
+                var itemdes = document.forms['itemadd']["itemdescription"].value;
+                if (itemdes.length > 120) {
+                    seterror("itmdes", "Input must be less than 120  characters");
+                    returnval = false;
+                }
+                
+    
+                return returnval;
+            }
+        </script>
+        
+    
+        <script>
+    
+            function ValidatemName() {
+                var numberRegex = new RegExp("[0-9]");
+                var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    
+    
+                var mname = document.forms['itemadd']["modelname"].value;
+                if ( mname.match(numRegex)) {
+                    seterror("mname", "Special Characters are not allowed");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("mname1");
+    
+                    errors.innerHTML = "";
+    
+                }
+    
+    
+                var  mname = document.forms['itemadd']["modelname"].value;
+                if ( mname.match(numberRegex)) {
+                    seterror("mname", "only characters are allowed");
+                    returnval = false;
+                }
+    
+    
+                var  mname = document.forms['itemadd']["modelname"].value;
+                if (mname.length == "") {
+                    seterror("mname", "This field is required");
+                    returnval = false;
+                }
+    
+                var  mname = document.forms['itemadd']["modelname"].value;
+                if ( mname.length > 50) {
+                    seterror("mname", "Input must be less than 50 characters");
+                    returnval = false;
+                }
+    
+                return returnval;
+            }
+    
+        </script>
+    
+        <script>
+            function ValidatemDate() {
+    
+                var mdate2 = document.forms['itemadd']["manufectuerdate"].value;
+                if (mdate2.length == "") {
+                    seterror("mdate", "This field is required");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("mdate1");
+    
+    
+                    errors.innerHTML = "";
+    
+    
+                }
+                return returnval;
+            }
+    
+    
+        </script>
+    
+        <script>
+            function ValidaterDate() {
+    
+                var rdate2 = document.forms['itemadd']["receivingdate"].value;
+                if (rdate2.length == "") {
+                    seterror("rdate", "This field is required");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("rdate1");
+    
+    
+                    errors.innerHTML = "";
+    
+    
+                }
+                return returnval;
+            }
+    
+    
+        </script>
+    
+        <script>
+            function ValidateDpprice() {
+    
+                var Dpprice = document.forms['itemadd']["dpprice"].value;
+                
+                if (Dpprice.length == "") {
+                    seterror("dpp", "This field is required");
+                    returnval = false;
+                }
+                else if (isNaN(Dpprice)) {
+                    seterror("dpp", "only digits are allowed");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("dp1");
+    
+                    
+                    errors.innerHTML = "";
+    
+                }
+               
+                
+    
+    
+                return returnval;
+            }
+    
+        </script>
+    
+        <script>
+            function ValidateMrp() {
+    
+                var Mrp = document.forms['itemadd']["mrp"].value;
+    
+                if (Mrp.length == "") {
+                    seterror("MRP", "This field is required");
+                    returnval = false;
+                }
+                else if (isNaN(Mrp)) {
+                    seterror("MRP", "only digits are allowed");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("mrp1");
+    
+                    errors.innerHTML = "";
+    
+                }
+    
+    
+                return returnval;
+            }
+    
+        </script>
+    
+        <script>
+            function ValidateBattery() {
+                var Btype = document.forms['itemadd']["battery"].value;
+                if (Btype.length == "") {
+                    seterror("btry", "This field is required");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("battery1");
+    
+                    errors.innerHTML = "";
+    
+                }
+                var Btype = document.forms['itemadd']["battery"].value;
+                if (Btype.length > 100) {
+                    seterror("btry", "Input must be less than 100  characters");
+                    returnval = false;
+                }
+    
+    
+                return returnval;
+            }
+        </script>
+    
+        <script>
+            function ValidateAmpear() {
+    
+                var Ampear = document.forms['itemadd']["ampear"].value;
+    
+                if (Ampear.length == "") {
+                    seterror("amp", "This field is required");
+                    returnval = false;
+                }
+                else if (isNaN(Ampear)) {
+                    seterror("amp", "only digits are allowed");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("amp1");
+    
+                    errors.innerHTML = "";
+    
+                }
+    
+    
+                return returnval;
+            }
+    
+        </script>
+    
+        <script>
+            function ValidateQuantity() {
+    
+                var Quantity = document.forms['itemadd']["quantity"].value;
+    
+                if (Quantity.length == "") {
+                    seterror("qty", "This field is required");
+                    returnval = false;
+                }
+                else if (isNaN(Quantity)) {
+                    seterror("qty", "only digits are allowed");
+                    returnval = false;
+                }
+                else {
+    
+                    errors = document.getElementById("qty1");
+    
+                    errors.innerHTML = "";
+    
+                }
+    
+    
+                return returnval;
+            }
+    
+        </script>
+    
+
+
+</body>
+
+</html>

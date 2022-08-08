@@ -1,0 +1,79 @@
+<html>
+  <head>
+
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <table class="table table-bordered">
+      <thead class="mbhead">
+        <tr class="mbrow">
+          <th>Input</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: items">
+        <tr>
+          <td><select class="form-control" data-bind="options: $parent.ddl, optionsText: 'firstName', value: selectedValue, optionsCaption: '--Select--'"> </select></td>
+          <td data-bind="with: selectedValue">
+            <span data-bind="text: firstName"></span>
+          </td>
+          <td data-bind="with: selectedValue">
+            <span data-bind="text: lastName"></span>
+          </td>
+          <td data-bind="with: selectedValue">
+            <span data-bind="text: address"></span>
+          </td>
+          <td>
+            <input type="button" value="Remove Row" data-bind="click: $parent.removeRow" class="btn btn-danger" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="col-xs-12 col-sm-6">  
+      <input type="button" value="Add Row" class="btn btn-primary" data-bind="click: addRow" />
+    </div>
+
+    <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
+    <script>
+      var ViewModel = function() {
+        var self = this;
+      
+        //Empty Row
+        self.items = ko.observableArray([new Item()]);
+        self.ddl = ko.observableArray();  
+      
+        self.addRow = function() {
+          self.items.push(new Item());
+        };
+      
+        self.removeRow = function(data) {
+          self.items.remove(data);
+        };
+        self.GetData = function() {
+          
+          if (self.ddl().length === 0) {
+            var item1 = new Item("Alex", "Sanders", "Maple Street");
+            self.ddl.push(item1);
+            var item2 = new Item("Sam", "Billings", "Mahony Street");
+            self.ddl.push(item2);
+          }
+        }
+      }
+      
+      var Item = function(fname, lname, address) {
+        var self = this;
+        self.firstName = ko.observable(fname);
+        self.lastName = ko.observable(lname);
+        self.address = ko.observable(address);
+        self.selectedValue = ko.observable();
+      };
+      
+      vm = new ViewModel()
+      vm.GetData();
+      ko.applyBindings(vm);
+    </script>
+  </body>
+</html>

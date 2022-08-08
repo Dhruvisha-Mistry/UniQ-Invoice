@@ -1,0 +1,216 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Item Master </h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Item Master
+                                            </a></li>
+                                        <li class="breadcrumb-item active">Item Master</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <div class="row">
+                                    <div class="col-lg-10 offset-1 ">
+                                        <div class="card" style="padding:25px;">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h1 class="card-title mb-0 flex-grow-1">Item Master Details </h1>
+
+                                            </div><!-- end card header -->
+                                            <form name="itemadd" method="POST" action="{% url 'ItemMaster:itemedit' imt.id %}"  onsubmit="return validateForm()" >
+                                                {% csrf_token %}
+                                    
+                                            <div class="card-body">
+                                                <div class="live-preview">
+                                                    <div class="row gy-4">
+                                                        <div class="col-lg-12" >
+                                                            <div class="input-group" >
+                                                                <label class="input-group-text" for="inputGroupSelect01">Warehouse</label>
+                                                                <select class="form-select" name="warehousename"  onfocusout="Validatewarehouse()" id="inputGroupSelect01">
+                                                                   {% comment %} <option selected="">Choose...</option> {% endcomment %}
+                                                                    {% for i in  warehousedata %}
+                                                                  
+                                                                    <option value="{{i.id}}">{{i.warehouse_name}}</option>
+                                                                    
+                                                                    {% endfor %}
+                                                                    
+                                                                </select>
+                                                              
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-xxl-12 col-md-6">
+                                                            <div id="itmname">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    item name: </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" onfocusout="ValidateName()"  onkeyup="ValidateName()"  name="itemname"
+                                                                        value="{{imt.item_name}}"    placeholder="Enter your dealer Item name">
+                                                                    <span id="itemname1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="itmdes">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    description </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    id="exampleInputrounded" name="itemdescription" onfocusout="Validateitmdes()"  onkeyup="Validateitmdes()"
+                                                                    value="{{imt.item_description}}"  placeholder="Enter your Item description" >
+                                                                    <span id="itmdesc1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="mname">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Model : </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    value="{{imt.model_name}}"  id="exampleInputrounded" name="modelname" onfocusout="ValidatemName()" onkeyup="ValidatemName()"
+                                                                    placeholder="Enter your Model" >
+                                                                    <span id="mname1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="mdate">
+                                                                <label for="exampleInputrounded" class="form-label">Manufacture date :</label>
+                                                                <input type="date" class="form-control rounded-pill"
+                                                                    value="{{m_date}}"     id="exampleInputrounded" name="manufectuerdate" onfocusout="ValidatemDate()" onchange="ValidatemDate()"
+                                                                    placeholder="Enter your Manufacture date" >
+                                                                    <span id="mdate1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="rdate">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">receiving date  : </label>
+                                                                <input type="Date" class="form-control rounded-pill"
+                                                                    value="{{r_date}}"   id="exampleInputrounded" name="receivingdate"  onfocusout="ValidaterDate()" onchange="ValidaterDate()"
+                                                                    placeholder="Enter your receiving data " >
+                                                                    <span id="rdate1" class="formerror"></span>
+                                                                   
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="dpp">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">DP Price :</label>
+                                                                <input type="text" class="form-control rounded-pill"  onkeypress="return onlyNumberKey(event)"
+                                                                    value="{{imt.DP_price}}"     id="exampleInputrounded" name="dpprice" onfocusout="ValidateDpprice()" onkeyup="ValidateDpprice()"
+                                                                    placeholder="Enter Dp Price" >
+                                                                    <span id="dp1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                                                      
+                                                        
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="MRP">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">MRP :</label>
+                                                                <input type="text" class="form-control rounded-pill"  onkeypress="return onlyNumberKey(event)"
+                                                                    value="{{imt.MRP}}"   id="exampleInputrounded" name="mrp" onfocusout="ValidateMrp()" onkeyup="ValidateMrp()"
+                                                                    placeholder="Enter  MRP (INR)" >
+                                                                    <span id="mrp1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-12 col-md-6">
+                                                            <div id="btry">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    Battery Type: </label>
+                                                                <input type="text" class="form-control rounded-pill"
+                                                                    value="{{imt.Battery_type}}"   id="exampleInputrounded" name="battery" onfocusout="ValidateBattery()" onkeyup="ValidateBattery()"
+                                                                    placeholder="Enter your battery type">
+                                                                    <span id="battery1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="amp">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Ampear :</label>
+                                                                <input type="text" class="form-control rounded-pill" onkeypress="return onlyNumberKey(event)"
+                                                                    value="{{imt.Ampear}}"    id="exampleInputrounded" name="ampear" onfocusout="ValidateAmpear()" onkeyup="ValidateAmpear()"
+                                                                    placeholder="Enter  Ampear" >
+                                                                    <span id="amp1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="qty">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Quentity :</label>
+                                                                <input type="text" class="form-control rounded-pill" onkeypress="return onlyNumberKey(event)"
+                                                                    value="{{imt.Quantity}}"   id="exampleInputrounded" name="quantity"  onfocusout="ValidateQuantity()" onkeyup="ValidateQuantity()"
+                                                                    placeholder="Enter Quentity" >
+                                                                    <span id="qty1" class="formerror"></span>
+                                                            </div>
+                                                         </div>
+                                                         <br>
+                                                        <br>
+                                                        <button class="btn btn-primary" name="submit"> Update </button>
+
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                        </div>
+                                        <center><a href = "{% url 'ItemMaster:display' %}"><button class="btn btn-primary" name="submit"> Cancel </button></a></center>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        {% endblock %}

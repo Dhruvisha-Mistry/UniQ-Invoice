@@ -1,0 +1,175 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<cemnter><h4>Edit Profile</h4></cemnter>
+       <!-- Vertical Overlay-->
+       <div class="vertical-overlay"></div>
+
+       <!-- ============================================================== -->
+       <!-- Start right Content here -->
+       <!-- ============================================================== -->
+       <div class="main-content">
+
+           <div class="page-content">
+               <div class="container-fluid">
+
+                   <!-- start page title -->
+                   <div class="row">
+                       <div class="col-12">
+                           <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                               <h4 class="mb-sm-0">profile</h4>
+
+                               <div class="page-title-right">
+                                   <ol class="breadcrumb m-0">
+                                       <li class="breadcrumb-item"><a href="javascript: void(0);">profile 
+                                           </a></li>
+                                       <li class="breadcrumb-item active">profile</li>
+                                   </ol>
+                               </div>
+
+                           </div>
+                       </div>
+                   </div>
+                   <!-- end page title -->
+
+                   <div class="row">
+                       <div class="col">
+
+                           <div class="h-100">
+                               <div class="row mb-3 pb-1">
+                                   <div class="col-12">
+                                       <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                       </div><!-- end card header -->
+                                   </div>
+                                   <!--end col-->
+                               </div>
+                               <!--end row-->
+
+                               <div class="row">
+                                   <div class="col-lg-10 offset-1 ">
+                                       <div class="card" style="padding:25px;">
+                                           <div class="card-header align-items-center d-flex">
+                                               <h1 class="card-title mb-0 flex-grow-1">Profile</h1>
+                                               
+                                           </div><!-- end card header -->
+                                           <div class="card-body">
+                                               <div class="live-preview">
+                                                   <div class="row gy-4">
+                                                        <form method="POST" class="needs-validation" action="{% url 'UniQInvoice:select_profile' %}">
+                                                            {% csrf_token %}
+                                                            <!-- {{c_id.Company_Name}} -->
+                                                            <!-- <div class="card-header">
+                                                                <!-- <h4>Edit Profile</h4> -->
+                                                            <!-- </div> -->
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6 col-12">
+                                                                        <label>Company Name</label>
+                                                                        <input type="text" class="form-control" name="Company_Name" value="{{c_id.Company_Name}}" >
+                                                                        <div class="invalid-feedback">
+                                                                            Please fill in the first name
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-md-6 col-12">
+                                                                        <label>GST Number</label>
+                                                                        <input type="text" class="form-control" name="GST_Number" value="{{c_id.GST_Number}}" >
+                                                                        <!-- <span>{{g_msg}}</span> -->
+                                                                        {%for message in messages %}
+                                                                        {%if "gst" in message.tags %}
+                                                                            <p style = "color:red"> {{message}} </p>   {# show gst error message #}
+                                                                        {%endif%}
+                                                                        {%endfor%}
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-7 col-12">
+                                                                        <label>Address</label>
+                                                                        <input type="text" class="form-control" name="Address"
+                                                                            value="{{c_id.Address}}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-5 col-12">
+                                                                        <label>Email Address</label>
+                                                                        <input type="email" class="form-control" name="Email_Address"
+                                                                            value="{{c_id.Email_Address}}">
+                                                                        {%for message in messages %}
+                                                                        {%if "email" in message.tags %}
+                                                                            <p style = "color:red"> {{message}} </p>   {# show email error message #}
+                                                                        {%endif%}
+                                                                        {%endfor%}
+                                                                    </div>
+                                                                    <div class="form-group col-md-5 col-12">
+                                                                        <label>Phone Number</label>
+                                                                        <input type="text" class="form-control" name="Phone_Number" value="{{c_id.Phone_Number}}">
+                                                                        {%for message in messages %}
+                                                                        {%if "mobile_no" in message.tags %}
+                                                                            <p style = "color:red"> {{message}} </p>   {# show mobile_no error message #}
+                                                                        {%endif%}
+                                                                        {%endfor%}
+                                                                    </div>
+                                                                    <div class="form-group col-md-5 col-12">
+                                                                        <label>Office Number</label>
+                                                                        <input type="number" class="form-control" name="Office_Number"
+                                                                            value="{{c_id.Office_Number}}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-5 col-12">
+                                                                        <label>Owner Name</label>
+                                                                        <input type="text" class="form-control" name="Owner_name"
+                                                                            value="{{c_id.Owner_name}}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-5 col-12">
+                                                                        <label>Company website</label>
+                                                                        <input type="text" class="form-control" name="Company_website"
+                                                                            value="{{c_id.Company_website}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer text-right">
+                                                                    <button class="btn btn-primary" type="submit">Save Change</button>
+                                                                </div>
+                                                            
+                                                                
+                                                            </div>
+                                                            
+                                                        </form>
+                                                        
+                                                        
+                                                        <
+                                                 
+                                                    </div>
+                                                  
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        {% endblock %}
+
+
+
+
+
+
+
+
+
+

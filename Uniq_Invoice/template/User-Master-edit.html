@@ -1,0 +1,168 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+        
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Customer Master </h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Customer Master
+                                            </a></li>
+                                        <li class="breadcrumb-item active">Customer Master</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col">
+
+                            <div class="h-100">
+                                <div class="row mb-3 pb-1">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-lg-center flex-lg-row flex-column">
+
+
+                                        </div><!-- end card header -->
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <div class="row">
+                                    <div class="col-lg-10 offset-1 ">
+                                        <div class="card" style="padding:25px;">
+                                            <div class="card-header align-items-center d-flex">
+                                                <h1 class="card-title mb-0 flex-grow-1">Customer Master Details </h1>
+
+                                            </div><!-- end card header -->
+                                            <form action="{% url 'ItemMaster:user_edit' u_edit.id %}" method="POST" onsubmit="return validateForm()"  name="myForm">
+                                                {% csrf_token %}
+                                            <div class="card-body">
+                                                <div class="live-preview">
+                                                    <div class="row gy-4">
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id= "fname">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    First Name </label>
+                                                                <input type="text" class="form-control rounded-pill" onfocusout="ValidateName()" onkeyup="ValidateName()"
+                                                                    id="exampleInputrounded" name="firstname" value="{{u_edit.First_name}}"
+                                                                    placeholder="Enter   First Name" >
+                                                                    <span id="Fname1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="lname">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    Last Name </label>
+                                                                <input type="text" class="form-control rounded-pill" onfocusout="ValidateLastName()" onkeyup="ValidateLastName()"
+                                                                    id="exampleInputrounded" name="lastname" value="{{u_edit.Last_name}}"
+                                                                    placeholder="Enter   Last Name" >
+                                                                    <span id="Lname1" class="formerror"></span>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="Contact">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Mobile Numer :</label>
+                                                                <input type="text" class="form-control rounded-pill" maxlength="10" onfocusout="ValidateContact()"  onkeyup="ValidateContact()" onkeypress="return onlyNumberKey(event)"
+                                                                    id="exampleInputrounded" name="Mob_num" value="{{u_edit.phone_number}}"
+                                                                    placeholder="Enter  mobile number">
+                                                                    <span id="Cont1" class="formerror"></span>
+
+                                                            </div>
+                                                        </div>
+                                                      
+                                                        
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="Email">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">E-mail</label>
+                                                                <input type="email" class="form-control rounded-pill"  onfocusout="ValidateEmail()" onkeyup="ValidateEmail()"
+                                                                    id="exampleInputrounded" name="email" value="{{u_edit.email_address}}"
+                                                                    placeholder="Enter e-mail Address" >
+                                                                    <span id="email12" class="formerror"></span>
+
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-xxl-6 col-md-6">
+                                                            <div id="psw">
+                                                                <label for="exampleInputrounded"
+                                                                    class="form-label">Password </label>
+                                                                <input type="password" class="form-control rounded-pill" onfocusout="ValidatePassword()" onkeyup="ValidatePassword()"
+                                                                id="myInput" name="Password"  value="{{u_edit.password}}" 
+                                                                    placeholder="Enter Password ">
+                                                                    
+                                                                    <span id="PSW1" class="formerror"></span>
+
+                                                        </div>
+                                                       <input type="checkbox" onclick="myFunction()" >Show Password
+                                                        
+                                                        </div>
+
+                                                         <div class="col-xxl-6 col-md-6">
+                                                            <div id="cpsw">
+                                                                <label for="exampleInputrounded" class="form-label">
+                                                                    Conform Password  </label>
+                                                                <input type="password" class="form-control rounded-pill" onfocusout="ValidateConfirmPsw()" onkeyup="ValidateConfirmPsw()"
+                                                                    id="exampleInputrounded" name="Cpassword"
+                                                                    placeholder="conform Password" >
+                                                                    <span id="CPSW1" class="formerror"></span>
+                                                            </div>
+                                                        </div>
+                        
+
+                                                        
+                                                        <br>
+                                                        <br>
+                                                        <button class="btn btn-primary"  name="submit"> Update </button>
+
+                                                    </div>
+                                                    <!--end row-->
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                        </div>
+                                        <center><a href = "{% url 'ItemMaster:user_data' %}"><button class="btn btn-primary" name="submit"> Cancel </button></a></center> 
+                                    </div>
+                                </div>
+                                <!--end col-->
+                            </div>
+
+
+                        </div> <!-- end .h-100-->
+
+                    </div> <!-- end col -->
+
+                    <!-- end col -->
+                </div>
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        {% endblock %}
