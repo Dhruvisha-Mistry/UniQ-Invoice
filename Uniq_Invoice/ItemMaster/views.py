@@ -313,6 +313,16 @@ def invoice_file(request):
     invoice_c = ' '.join([str(random.randint(0, 999)).zfill(6) for _ in range(1)])
     Invoice_no = invoice_a + invoice_b + invoice_c
     
+    # last_invoice = INVOICE_MASTER.objects.get(InvoiceNo).last()
+    # if not last_invoice:
+    #      return 'MAG0001'
+    # invoice_no = last_invoice.invoice_no
+    # invoice_int = int(invoice_no.split('INV')[-1])
+    # new_invoice_int = invoice_int + 1
+    # new_invoice_no = 'INV' + '2122' + str(new_invoice_int)
+    # print("new_invoice_no-----------------------",new_invoice_test)
+
+
 
     lid = Login_Master.objects.get(id = request.session['id'])
     d_id = Dealer_Master.objects.filter(Company_id_id = lid.Company_id_id)
@@ -329,7 +339,7 @@ def invoice_file(request):
     today = date.today()
     d1 = today.strftime("%b. %d, %Y")
     due_date = today + timedelta(days=15)
-
+    
     return render(request,'invoicetest.html',{'allitem':allitem,'lid':lid,'d_id':d_id,'d1':d1,'due_date':due_date,'alldealer':alldealer,'allcustomer':allcustomer,'Invoice_no':Invoice_no}) 
 
 
