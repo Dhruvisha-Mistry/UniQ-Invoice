@@ -10,6 +10,11 @@ from UniQInvoice.models import Login_Master
 import random
 from datetime import date
 from datetime import timedelta
+
+import json
+from django.http import HttpResponse
+from django.http import JsonResponse
+
 def add_item(request):
     if 'id'  in request.session:
     
@@ -67,8 +72,6 @@ def add_item(request):
     else:
        return redirect('/companylogin/')
         
-
-
 def display(request):
      if 'id'  in request.session:
     
@@ -76,7 +79,6 @@ def display(request):
         return render(request,"Item-Master_data.html",{'tid':tid})
      else:
        return redirect('/companylogin/')
-
 
 def itemedit(request,pk):
     
@@ -173,6 +175,7 @@ def warehouse(request):
             return render(request,"Warehouse-Master.html")
     else:
         return redirect('companylogin')
+
 def warehouseshow(request):
     
     wid= Warehouse_Master.objects.all()
@@ -200,6 +203,7 @@ def warehouse_edit(request,pk):
             wid= Warehouse_Master.objects.all()
             
             return render(request,"Warehouse-Master.html",{'wid':wid})
+
 def delete_warehouse(request,pk):
     
     print(pk)
@@ -209,8 +213,6 @@ def delete_warehouse(request,pk):
     
     wid= Warehouse_Master.objects.all()
     return render(request,"Warehouse-Master.html",{'wid':wid})
-
-
 
 def user (request ) :
     if 'id'  in request.session:
@@ -258,7 +260,6 @@ def user (request ) :
     else:
         return redirect('/companylogin/')
 
-
 def user_data(request):
     if 'id'  in request.session:
         
@@ -267,8 +268,6 @@ def user_data(request):
     else:
        return redirect('/companylogin/') 
 
-# def table(request):
-#      return render(request,"table.html")
 def user_edit (request,pk ) :
     if request.method=="GET":
             u_edit= User_Master.objects.get(id = pk)
@@ -292,8 +291,6 @@ def user_edit (request,pk ) :
             
             uid=User_Master.objects.all()
             return render(request,"User-Master-data.html",{'uid':uid })
-
-
 
 def delete_user(request,pk):
     
@@ -325,7 +322,12 @@ def invoice_file(request):
 
 
     lid = Login_Master.objects.get(id = request.session['id'])
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",lid)
+    c_id = Company_Master.objects.filter(id = lid.Company_id_id)
+    
+    print("@@@@@@@@@@@",c_id)
     d_id = Dealer_Master.objects.filter(Company_id_id = lid.Company_id_id)
+    print("```````````````````````````````````````````````",d_id)
 
     alldealer = Dealer_Master.objects.filter(IsDeleted='0',IsDealer='1')
     allcustomer = Dealer_Master.objects.filter(IsDeleted='0',IsDealer='0')
@@ -339,26 +341,52 @@ def invoice_file(request):
     today = date.today()
     d1 = today.strftime("%b. %d, %Y")
     due_date = today + timedelta(days=15)
+    Due_Date =due_date.strftime("%Y-%m-%d")
+    return render(request,'invoicetest.html',{'allitem':allitem,'c_id':c_id,'lid':lid,'d_id':d_id,'d1':d1,'Due_Date':Due_Date,'alldealer':alldealer,'allcustomer':allcustomer,'Invoice_no':Invoice_no}) 
+
+def get_topics_ajax(request):
+    if request.method == "POST":
+        item_id = request.POST['item_id']
+        try:
+            subject = Item_Master.objects.filter(id = item_id)
+
+            for i in subject:
+                name=i.item_name
+
+                print("name",name)
+
+        except Exception:
+            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            data['error_message'] = 'error'
+            return JsonResponse(data)
+        return JsonResponse(list(subject.values('item_name','item_description','model_name','DP_price','Ampear','Quantity')), safe = False) 
     
-    return render(request,'invoicetest.html',{'allitem':allitem,'lid':lid,'d_id':d_id,'d1':d1,'due_date':due_date,'alldealer':alldealer,'allcustomer':allcustomer,'Invoice_no':Invoice_no}) 
-
-
-    
-# def qntity_increment(request,id):
-#     count=cart.objects.get(id=id)
-#     cust_id = menu.objects.get(pizza_name = count.menu_id)
-#     count.quantity = count.quantity+1 
-#     count.total_prize = int(count.quantity) * int(cust_id.pizza_price)
-#     count.save()
-#     return redirect("/pizza_checkout/")
-
-# def qntity_decrement(request,id):
-#     count=cart.objects.get(id=id)
-#     cust_id = menu.objects.get(pizza_name = count.menu_id)
-#     count.quantity= count.quantity-1
-#     count.total_prize = int(count.quantity) * int(cust_id.pizza_price)
-#     for i in  range(count.quantity):
-#         if i < 1 :
-#             pass
-#         count.save()
-#     return redirect("/pizza_checkout/")
+def dealerinformation(request):
+    if request.method == "POST":
+        dealerinfo_id = request.POST['dealinfo']
+        try:
+            info = Dealer_Master.objects.filter(id = dealerinfo_id)
+            
+            print("!!!!!!!!!!!!!!!!!!!!!!!",info)
+        except Exception:
+            print("###")
+            data['error_message'] = 'error'
+            return JsonResponse(data)
+        return JsonResponse(list(info.values('id','dealer_company_name','dealre_name','dealer_address','gst_number','dealer_email_address','dealer_phone_number','dealer_office_number')), safe = False)
+        
+        
+def customerinformation(request):
+    if request.method == "POST":
+        custinfo_id = request.POST['custinfo']
+        try:
+            info = Dealer_Master.objects.filter(id = custinfo_id)
+            
+            print("!!!!!!!!!!!!!!!!!!!!!!!",info)
+        except Exception:
+            print("###")
+            data['error_message'] = 'error'
+            return JsonResponse(data)
+        return JsonResponse(list(info.values('id','dealer_company_name','dealre_name','dealer_address','gst_number','dealer_email_address','dealer_phone_number','dealer_office_number')), safe = False)
+# def save_invoice(request):
+#     if request.method== "POST":
+#         =request.POST.get('')

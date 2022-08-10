@@ -3,16 +3,12 @@
 {% block content %}
 
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
-
-                    <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0">Invoice</h4>
-
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard
@@ -21,12 +17,9 @@
                                         <li class="breadcrumb-item active">Invoice</li>
                                     </ol>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
 
                     <div class="row">
                         <div class="col">
@@ -35,32 +28,20 @@
                                 <div class="row mb-3 pb-1">
                                     <div class="col-12">
                                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
-
-
-                                        </div><!-- end card header -->
+                                        </div>
                                     </div>
                                     <!--end col-->
                                 </div>
-                                <!--end row-->
-
-
-
-
 
                                 <div class="row">
                                     <div class="col">
-            
                                         <div class="h-100">
                                             <div class="row mb-3 pb-1">
                                                 <div class="col-12">
                                                     <div class="d-flex align-items-lg-center flex-lg-row flex-column">
-            
-            
-                                                    </div><!-- end card header -->
+                                                    </div>
                                                 </div>
-                                                <!--end col-->
                                             </div>
-                                            <!--end row-->
                                             <form method="POST" action="/invoice_file/">
                                                 {% csrf_token %}
                                                 <div class="row">
@@ -68,8 +49,7 @@
                                                         <div class="card" style="padding:25px;">
                                                             <div class="card-header align-items-center d-flex">
                                                                 <h1 class="card-title mb-0 flex-grow-1"><center>INVOICE</center></h1>
-                
-                                                            </div><!-- end card header -->
+                                                            </div>
                                                             <div class="card-body">
                                                                 <div class="live-preview">
                                                                     <div class="row gy-4">
@@ -123,27 +103,20 @@
                                                                         <div class="col-xxl-6 col-md-3">
                                                                             <br>
                                                                             <div>
-                                                                                
                                                                                 <div id = "one"> 
-
-                                                                        
-                                                                                    <select name="school" id="12" class="form-control">
+                                                                                    <select name="school" id = "dealerinfo" class="form-control">
                                                                                         {% for x in alldealer %} 
-                                                                                            <option value='1' ><b> {{x}}</b></option>
+                                                                                            <option value="{{x.id}}" ><b> {{x}}</b></option>
                                                                                         {% endfor %}
                                                                                     </select>
-        
                                                                                 </div>
         
         
-                                                                                <div id = "two" style = "display:none ;">
-                                                                                
-                                                                                    <select name="school" id="23" class="form-control">
+                                                                                <div id = "two"  style = "display:none ;">
+                                                                                    <select name="school" id = "customerinfo" class="form-control">
                                                                                         {% for x in allcustomer %} 
-                                                                                            <option value='1' ><b>{{x}}</b> </option>
+                                                                                            <option value='{{x.id}}' ><b>{{x}}</b> </option>
                                                                                         {% endfor %}
-        
-        
                                                                                     </select>
                                                                                 </div>
         
@@ -163,113 +136,117 @@
                                                                         </div>
                                                                         
                                                                         <div class="col-xxl-6 col-md-6">
-                                                                            <div>
-                                                                                <label for="exampleInputrounded"
-                                                                                    class="form-label">Dealer Information :</label>
-                                                                                <input type="number" class="form-control rounded-pill"
-                                                                                     name="Dealer_information">
+                                                                            <div id = "viewdealer">
+
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="col-xxl-6 col-md-6">
                                                                             <div>
-                                                                                <label for="exampleInputrounded"
-                                                                                    class="form-label"> Company Information</label>
-                                                                                <input type="number" class="form-control rounded-pill"
-                                                                                     name="Invoice_Type">
+                                                                                {% for i in c_id %}
+                                                                                    <p><b>Company Name :  </b>{{i.Company_Name}}</p>
+                                                                                    <p><b>Owner Name : </b>{{i.Owner_name}}</p>
+                                                                                    <p><b>Address :    </b>{{i.Address}}</p>
+                                                                                    <p><b>Email :  </b>{{i.Email_Address}}</p>
+                                                                                    <p><b>Phone No :   </b>{{i.Phone_Number}}</p>
+                                                                                    <p><b>GST NO. :    </b>{{i.GST_Number}}</p>
+                                                                                    <p><b>Office NO. : </b>{{i.Office_Number}}</p>
+                                                                                {% endfor %}
                                                                             </div>
                                                                         </div>
-                                                                        <p id="demo"></p>
-                                                                        <!-- <label> </label> -->
-                                                                        <SELECT  style="width: 150px;" id = "dropDownId" name="selecteditem" onchange="addVal(this)">
+                                                                       
 
-                                                                            {% for x in allitem %} 
-                                                                                <option value='1' ><b> {{x.item_name}}</b></option>
-                                                                            {% endfor %}
+                                                                        
 
-                                                                
-                                                                        </SELECT>
-
-                                                                        <INPUT type="button" style="width: 100px;" value="Add Row" onclick="addRow('dataTable')" />&nbsp;    
-                                                                        <INPUT type="button" style="width: 100px;" value="Delete Row" onclick="deleteRow('dataTable')" />
-                                                                        <!-- <table border = 1 width="250px"> -->
-                                                                            <table border="1" width="250px">
+                                                                        <style>
+                                                                            table, th, td {
+                                                                              border: 1px solid black;
+                                                                            }
+                                                                        </style>
+                                                                        
+                                                                        <div class="col-xxl-6 col-md-3">
+                                                                            
+                                                                            <label>Selcet A value From to Add new Row</label>  
+                                                                            <SELECT  style="width: 150px;" id="question-subject" name="selecteditem">
+                                                                                {% for x in allitem %} 
+                                                                                    <option value='{{x.id}}' ><b> {{x.item_name}}</b></option>
+                                                                                {% endfor %}
+                                                                            </SELECT>&nbsp; 
+                                                                            
+                                                                        </div> 
+                                                                            <table border="1"  width="250px">
+                                                                                <thead>
+                                                                                    <TR>
+                                                                                        <th align="center"><INPUT  type="text" size="10px" value="Item Name"></th> 
+                                                                                        <th><INPUT  type="text" size="19px" value="Description"/></th>
+                                                                                        <th><INPUT  type="text" size="19px" value="Model Name"/></th>
+                                                                                        <th><INPUT  type="text" size="19px" value="AMP" /></th>
+                                                                                        <th><INPUT  type="text" size="19px" value="Avilable Quantity"/></th>
+                                                                                        <th><INPUT type="text" size="19px" value="Quantity"/></th>
+                                                                                        <th><INPUT  type="text" size="19px" value="Rate"/></th>
+                                                                                        <th><INPUT  type="text" size="15px" value="Amount"/></th>
+                                                                                    </TR>
+                                                                                
+                                                                                </thead>
+                                                                            </table>
+                                                                            <table id="dataTable">
                                                                                 <TR>
-                                                                                    <th align="center"><INPUT  type="text" size="10px" value="Item Name"></th> 
-                                                                                    <th><INPUT  type="text" size="19px" value="Description"/></th>
-                                                                                    <th><INPUT  type="text" size="19px" value="Model Name"/></th>
-                                                                                    <th><INPUT  type="text" size="19px" value="AMP" /></th>
-                                                                                    <th><INPUT  type="text" size="19px" value="Avilable Quantity"/></th>
-                                                                                    <th><INPUT type="text" size="19px" value="Quantity"/></th>
-                                                                                    <th><INPUT  type="text" size="19px" value="MRP"/></th>
-                                                                                    <th><INPUT  type="text" size="19px" value="Amount"/></th>
-                                                                                    <!-- <th><input type="text" size ="19px" value="Delete"></th> -->
-                                                                    
+                                                                                
+                                                                                    <TD style="height:0px;width:80PX"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:128px"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:125px"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:125px"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:125px"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:125px"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:130px"><INPUT type="hidden" /></TD>
+                                                                                    <TD style="height:0px;width:105px"><INPUT type="hidden" /></TD>
                                                                                     
                                                                                 </TR>
-                                                                            </table>
-                                                                            <TABLE id="dataTable" border="1" >
-                                                                            
-                                                                                <TR>
-                                                                                
-                                                                                <TD><INPUT  type="text" size=10 id="txt0" name="txt"/></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0"  name="txtt"/></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0" name="txtt" /></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0" name="txtt"/></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0" name="txtt"/></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0" name="txtt"/></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0" name="txtt"/></TD>
-                                                                                <TD><INPUT type="text" size=19 id="txtt0" name="txtt"/></TD>
-                                                                                
-                                                                                </TR>
-                                                                            </TABLE>
-                                                                        
+
+                                                                            </table> 
                 
                                                                         <br>
                                                                         <br>
                                                                         <div class="col-md-4 offset-8">
                                                                             <table class="table table-striped table-bordered table-sm" style="width: 400px; float: right !important;">
                                                                                 <tbody>
-                                                                                <tr>    
-                                                                                    <th>SGST (9 %):</th>
-                                                                                    <td>1000</td>
-                                                                                </tr>
-                                                                                <tr>    
-                                                                                    <th>CGST (9 %):</th>
-                                                                                    <td>1000</td>
-                                                                                </tr>
-                                                                                <tr>    
-                                                                                    <th>Total Bil Amount :</th>
-                                                                                    <td>1000</td>
-                                                                                </tr>
-                                                                            
-                                                                            </tbody>
+                                                                                    <tr>    
+                                                                                        <th>SGST (9 %):</th>
+                                                                                        <td>1000</td>
+                                                                                    </tr>
+                                                                                    <tr>    
+                                                                                        <th>CGST (9 %):</th>
+                                                                                        <td>1000</td>
+                                                                                    </tr>
+                                                                                    <tr>    
+                                                                                        <th>Total Bil Amount :</th>
+                                                                                        <td>1000</td>
+                                                                                    </tr>
+                                                                                
+                                                                                </tbody>
                                                                             </table>
-                                                                            </div>
-
-                                                                        
-                                                                        
+                                                                        </div>
                                                                     </div>
-   
                                                                 </div>
-                
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <!--end col-->
                                         </div>
-                                        <!-- <center><a href="{%url 'UniQInvoice:dealercanwatch'%}"><button class="btn btn-primary" name="cancel"> cancel </button></a></center> -->
-                                        <script>
-                                            $('#dropDownId :selected').text();
-
-                                        </script>
+                                        
                                         <script
                                             src="http://code.jquery.com/jquery-3.5.1.min.js"
                                             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                                             crossorigin="anonymous">
                                         </script>
+
                                         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
                                         <script>
                                             function yourfunction(radioid)
                                         {
@@ -293,6 +270,7 @@
 
                                         }
                                         </script>
+
                                         <script>
                                             $(document).ready(function(){
                                         
@@ -313,7 +291,6 @@
                                             
                                         </script>
 
-                                          
                                          <script>
                                             function deleteRow(row) {
 
@@ -350,97 +327,14 @@
                                             
                                             }
                                         </script>  
-                                        <!-- <script>
-                                            $(function(){
-  
-                                                for(var i=0;i<3;i++){
-                                                   var trd="";
-                                                trd +="<tr>";
-                                                trd +="<td>";
-                                                trd+="<select class='input-small'>{% for x in tid %} <option value='1' ><b>{{x.item_name}}</b> </option>{% endfor %}";
-                                                trd+="</td>";
-                                                
-                                                trd+="</tr>";
-                                                     $(".table-bordered tbody").append(trd); 
-                                                }
-                                                
-                                               
-                                                
-                                            });
-                                        </script> -->
-<!--                                         
-                                        <script>
-                                            function invoiceaddroe() {
-                                              var table = document.getElementById("invoiceitemable");
-                                              var row = table.insertRow(1);
-                                              var cell1 = row.insertCell(0);
-                                              var cell2 = row.insertCell(1);
-                                              
-                                              var cell3 = row.insertCell(2);
-                                              var cell4 = row.insertCell(3);
-                                              var cell5 = row.insertCell(4);
-                                              var cell6 = row.insertCell(5);
-                                              var cell7 = row.insertCell(6);
-                                              var cell8 = row.insertCell(7);
-                                              var cell9 = row.insertCell(8);
-                                           
-                                              cell1.innerHTML = "NEW CELL1";
-                                              cell2.innerHTML = "NEW CELL2";
-                                              cell3.innerHTML = "NEW CELL3";
-                                              cell4.innerHTML = "NEW CELL4";
-                                              cell5.innerHTML = "NEW CELL5";
-                                              cell6.innerHTML = "NEW CELL6";
-                                              cell7.innerHTML = "NEW CELL7";
-                                              cell8.innerHTML = "NEW CELL8";
-                                              
-                                            }
-                                        </script> -->
-                                        
-                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
-
-                                    
 
 
-                                        <!--date-->
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                         <script>
                                             $('#date').val(new Date().toJSON().slice(0,10));
-                                           
                                         </script>
-                                        
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+
+
                                         <script>
-                                            function addRow(tableID) {
-                                                var table = document.getElementById(tableID);
-                                                var rowCount = table.rows.length;
-                                                var row = table.insertRow(rowCount);
-                                                var colCount = table.rows[0].cells.length;
-                                                for(var i=0; i<colCount; i++) {
-                                                    var newcell = row.insertCell(i);
-                                                    newcell.innerHTML = table.rows[0].cells[i].innerHTML;
-                                        
-                                                    switch(newcell.childNodes[0].type) {
-                                                    case "text":
-                                                    newcell.childNodes[0].value = "";
-                                                    if(i == 1)
-                                                    {
-                                                     newcell.childNodes[0].id = "txt"+rowCount;
-                                                    }
-                                                    else if(i==2)
-                                                    {
-                                                     newcell.childNodes[0].id = "txtt"+rowCount;
-                                                    }
-                                                    break;
-                                                    case "checkbox":
-                                                    newcell.childNodes[0].checked = false;
-                                                    break;
-                                                    case "select-one":
-                                                    newcell.childNodes[0].selectedIndex = 0;
-                                                    break;
-                                                    }
-                                                }
-                                            }
                                             function deleteRow(tableID) {
                                                 try {
                                                     var table = document.getElementById(tableID);
@@ -462,33 +356,161 @@
                                                 alert(e);
                                                 }
                                             }
-                                            function addVal(ob){
-                                                var suf = ob.parentNode.parentNode.rowIndex;
-                                                var text = ob.options[ob.selectedIndex].text;
-                                                var value = ob.value;
-                                
-                                              
-                                                document.getElementById("txt" + suf).value = text
-                                                document.getElementById("txtt" + suf).value = value
-                                            }
+                                            
                                         </script>
-            
-                                    </div> <!-- end .h-100-->
+
+                                        <script>
+                                            $("#question-subject").change(function () {
+                                                const subjectId = $(this).val();  // get the selected subject ID from the HTML dropdown list 
+                                                console.log(subjectId)
+                                                $.ajax({                       // initialize an AJAX request
+                                                    type: "POST",
+                                                    url: '/get_topics_ajax/',
+                                                    data: {
+                                                        'item_id': subjectId,       // add the country id to the POST parameters
+                                                        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                                                    },
+                                                    success: function (data) {   // `data` is from `get_topics_ajax` view function
+                                                       // replace the contents of the topic input with the data that came from the server
+                                                        console.log(data);
+                                                        var table = document.getElementById("dataTable");
+                                                            var rowCount = table.rows.length;
+                                                            var row = table.insertRow(rowCount);
+                                                            var colCount = table.rows[0].cells.length;
+                                                            for(var i=0; i<colCount; i++) {
+                                                                var newcell = row.insertCell(i);
+                                                                newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+                                                                newcell.childNodes[0].id = "txt"+rowCount;
+                                                                
+                                                                if (i==0){
+
+                                                                    $("#dataTable").append(
+                                                                       
+                                                                        `<tr>
+                                                                            <td style="height:10px;width:120px" name = "item_name">${data[0].item_name}</td>
+                                                                            <td style="height:10px;width:195px">${data[0].item_description}</td>
+                                                                            <td style="height:10px;width:195px">${data[0].model_name}</td>
+                                                                            <td style="height:10px;width:190px">${data[0].Ampear}</td>
+                                                                            <td style="height:10px;width:195px">${data[0].Quantity}</td>
+                                                                            <td style="height:10px;width:188px"><span class="wpcf10-form-control-wrap eon-black-qty">
+                                                                                <input type="number" name="eon-black-qty" value="" style="width:190px; height:70px;!important" min="0" max="9999" aria-invalid="false">
+                                                                            </span></td>
+                                                                            <td style="height:10px;width:195PX">${data[0].DP_price}</td>
+                                                                            <td style="height:10px;width:158px"><span class="wpcf10-form-control-wrap eon-black-qty">
+                                                                                <input type="number" name="eon-black-qty" value="" style="width:168px; height:70px;!important" min="0" max="9999" aria-invalid="false">
+                                                                            </span></td>
+                                                                            
+                                                                            
+                                                                        </tr>`);
+                                                                   
+                                                                }
+                                                                
+                                                            }
+
+
+                                                                }
+                                                            });
+                                                        });
+                                        </script>
+
+                                        <script>
+                                            $("#dealerinfo").change(function () {
+                                                const dealinfo = $(this).val();  // get the selected subject ID from the HTML dropdown list 
+                                                
+                                                $.ajax({                       // initialize an AJAX request
+                                                    type: "POST",
+                                                    url: '/dealerinformation/',
+                                                    data: {
+                                                        'dealinfo': dealinfo,       // add the country id to the POST parameters
+                                                        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                                                    },
+                                                    success: function (data) {   // `data` is from `get_topics_ajax` view function
+                                                       // replace the contents of the topic input with the data that came from the server
+                                                        console.log(data);
+                                                        $("#viewdealer").empty();
+                                                        $("#viewdealer").append
+
+                                                        
+                                                            var mainContainer = document.getElementById("viewdealer");
+                                                            for (var i = 0; i < data.length; i++) {
+                                                              var div = document.createElement("div");
+                                                            
+                                                              console.log(data[0].id);
+                                                              div.innerHTML = "<b>" + 'Dealer Company Name  : '+ "</b>"   + data[0].dealer_company_name + "<br/>" + "<br/>" 
+                                                          
+                                                                            +"<b>" + 'Dealer Name :    ' + "</b>" + data[i].dealre_name + "<br/>" + "<br/>" 
+                                                                            +"<b>" + 'Dealer Address : ' +"</b>" + data[i].dealer_address + "<br/>" + "<br/>" 
+                                                                            +"<b>" + 'Dealer Email :   ' +"</b>" + data[i].dealer_email_address  + "<br/>"+ "<br/>" 
+                                                                            +"<b>" + 'Dealer Mobile NO. :  ' +"</b>" + data[i].dealer_phone_number + "<br/>"+ "<br/>" 
+                                                                            +"<b>" + 'Dealer GST Number :  ' +"</b>" + data[i].gst_number+ "<br/>"+ "<br/>" 
+                                                                            +"<b>" + 'Dealer Office NO. :  ' +"</b>" + data[i].dealer_office_number;
+
+
+                                                              mainContainer.appendChild(div);
+                                                            }
+                                                          
+
+                                                    }
+                                                                
+                                              
+                                                });
+                                            });
+                                        
+                                        </script>
+
+                                        <script>
+                                            $("#customerinfo").change(function () {
+                                                const custinfo = $(this).val();  // get the selected subject ID from the HTML dropdown list 
+                                                console.log(custinfo)
+                                                $.ajax({                       // initialize an AJAX request
+                                                    type: "POST",
+                                                    url: '/customerinformation/',
+                                                    data: {
+                                                        'custinfo': custinfo,       // add the country id to the POST parameters
+                                                        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                                                    },
+                                                    success: function (data) {   // `data` is from `get_topics_ajax` view function
+                                                       // replace the contents of the topic input with the data that came from the server
+                                                        console.log(data);
+                                                        $("#viewdealer").empty();
+                                                        $("#viewdealer").append
+
+                                                        
+                                                            var mainContainer = document.getElementById("viewdealer");
+                                                            for (var i = 0; i < data.length; i++) {
+                                                              var div = document.createElement("div");
+                                                            
+                                                              console.log(data[0].id);
+                                                              div.innerHTML = "<b>" +'Customer Company Name  : '+ "</b>"  + data[0].dealer_company_name + "<br/>"  + "<br/>"
+                                                                            +"<b>" + 'Customer Name :    ' + "</b>"  + data[i].dealre_name + "<br/>"  + "<br/>"
+                                                                            +"<b>" + 'Customer Address : ' + "</b>"  + data[i].dealer_address + "<br/>"  + "<br/>"
+                                                                            +"<b>" + 'Customer Email :   ' + "</b>"  + data[i].dealer_email_address  + "<br/>" + "<br/>"
+                                                                            +"<b>" + 'Customer Mobile NO. :  ' + "</b>"  + data[i].dealer_phone_number + "<br/>" + "<br/>"
+                                                                            +"<b>" + 'Customer GST Number :  ' + "</b>"  + data[i].gst_number+ "<br/>" + "<br/>"
+                                                                            +"<b>" + 'Customer Office NO. :  ' + "</b>"  + data[i].dealer_office_number;
+
+
+                                                              mainContainer.appendChild(div);
+                                                            }
+                                                          
+
+                                                    }
+                                                                
+                                              
+                                                });
+                                            });
+                                        
+                                        </script>
+
+                                    </div> 
             
                                 </div>
-                                <!--end col-->
                             </div>
-
-
-                        </div> <!-- end .h-100-->
-
-                    </div> <!-- end col -->
-
-                    <!-- end col -->
+                        </div>   
+                    </div> 
                 </div>
-
             </div>
-            <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
+
+
 {% endblock %}

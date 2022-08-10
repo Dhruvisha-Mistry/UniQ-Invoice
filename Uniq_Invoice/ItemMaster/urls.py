@@ -20,6 +20,11 @@ urlpatterns = [
     path('delete_user/<int:pk>/', views.delete_user, name='delete_user'),
     path('invoice_file/',views.invoice_file, name= "invoice_file"),
     path('Invoice_View/',views.Invoice_View, name= "Invoice_View"),
+    path('get_topics_ajax/',views.get_topics_ajax, name= "get_topics_ajax"),
+    path('dealerinformation/',views.dealerinformation, name= "dealerinformation"),
+    path('customerinformation/',views.customerinformation, name= "customerinformation"),
+
+    
     
     
 ] 

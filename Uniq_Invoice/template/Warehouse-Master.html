@@ -231,7 +231,7 @@
         function validateForm() {
             var returnval = true;
             clearErrors();
-            var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<sc>\/?]+/;
+            var numRegex = /[!@#$%^&*()_+\-=\[\]{};':"]+/;
             var numberRegex = new RegExp("[0-9]");
     
                 var iname = document.forms['warehoseForm']["warehousename"].value;
