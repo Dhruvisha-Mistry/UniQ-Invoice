@@ -66,7 +66,7 @@
                                                                             <div>
                                                                                 <label for="exampleInputrounded" class="form-label">
                                                                                     Invoice Date : </label>
-                                                                                <input type="date" class="form-control rounded-pill" id="date" name="date">
+                                                                                <input type="date" class="form-control rounded-pill" id="date" name="invoice_date">
 
                                                                             </div>
                                                                         </div>
@@ -75,7 +75,7 @@
                                                                                 <label for="exampleInputrounded"
                                                                                     class="form-label">Invoice Due Date : </label>
                                                                                 <input type="date" class="form-control rounded-pill"
-                                                                                     name="Invoice_Due_Date" value = "{{Due_Date}}" id = "duedate">
+                                                                                     name="Invoice_Due_Date" value = "{{Due_Date}}" id = "invoice_duedate">
                                                                             </div>
                                                                         </div>
                                                                         
@@ -84,41 +84,22 @@
                                                                                 <label for="exampleInputrounded"
                                                                                     class="form-label">PO : </label>
                                                                                 <input type="text" class="form-control rounded-pill"
-                                                                                     name="Po">
+                                                                                     name="invoice_po">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-xxl-6 col-md-3">
-                                                                            <div>
-                                                                                <label for="exampleInputrounded"
-                                                                                    class="form-label">Dealer/Customer: </label>
-                                                                                
-                                                                                <br>
-                                                                                <INPUT TYPE='radio' NAME='grp2' VALUE='City0' onClick="javascript:return yourfunction(1)" checked>&nbsp;<b>Dealer</b>
-                                                                                    &nbsp;
-                                                                                <INPUT TYPE='radio' NAME='grp2' VALUE='City1' onClick="javascript:return yourfunction(2)">&nbsp;<b>Customer</b>
-                                                                            </div>
-                                                                        </div>
+
                                                                        
                                                                         
-                                                                        <div class="col-xxl-6 col-md-3">
-                                                                            <br>
+                                                                        <div class="col-xxl-6 col-md-6">
                                                                             <div>
-                                                                                <div id = "one"> 
-                                                                                    <select name="school" id = "dealerinfo" class="form-control">
+                                                                                
+                                                                                    <select name="dealer" id = "dealerinfo" class="form-control rounded-pill">
                                                                                         {% for x in alldealer %} 
                                                                                             <option value="{{x.id}}" ><b> {{x}}</b></option>
                                                                                         {% endfor %}
                                                                                     </select>
-                                                                                </div>
-        
-        
-                                                                                <div id = "two"  style = "display:none ;">
-                                                                                    <select name="school" id = "customerinfo" class="form-control">
-                                                                                        {% for x in allcustomer %} 
-                                                                                            <option value='{{x.id}}' ><b>{{x}}</b> </option>
-                                                                                        {% endfor %}
-                                                                                    </select>
-                                                                                </div>
+                                                                                
+
         
                                                                             </div>
                                                                         </div>
@@ -166,10 +147,10 @@
                                                                         
                                                                         <div class="col-xxl-6 col-md-3">
                                                                             
-                                                                            <label>Selcet A value From to Add new Row</label>  
+                                                                            <B>Selcet A value to Add new Row </B> 
                                                                             <SELECT  style="width: 150px;" id="question-subject" name="selecteditem">
                                                                                 {% for x in allitem %} 
-                                                                                    <option value='{{x.id}}' ><b> {{x.item_name}}</b></option>
+                                                                                    <option value='{{x.id}}' ><b>{{x.item_name}}</b></option>
                                                                                 {% endfor %}
                                                                             </SELECT>&nbsp; 
                                                                             
@@ -190,7 +171,7 @@
                                                                                 </thead>
                                                                             </table>
                                                                             <table id="dataTable">
-                                                                                <TR>
+                                                                                <!-- <TR>
                                                                                 
                                                                                     <TD style="height:0px;width:80PX"><INPUT type="hidden" /></TD>
                                                                                     <TD style="height:0px;width:128px"><INPUT type="hidden" /></TD>
@@ -201,7 +182,7 @@
                                                                                     <TD style="height:0px;width:130px"><INPUT type="hidden" /></TD>
                                                                                     <TD style="height:0px;width:105px"><INPUT type="hidden" /></TD>
                                                                                     
-                                                                                </TR>
+                                                                                </TR> -->
 
                                                                             </table> 
                 
@@ -212,19 +193,29 @@
                                                                                 <tbody>
                                                                                     <tr>    
                                                                                         <th>SGST (9 %):</th>
-                                                                                        <td>1000</td>
+                                                                                        <td>
+                                                                                            <input type="text" name="sgst" value = "SGST 9%">
+                                                                                        </td>   
                                                                                     </tr>
                                                                                     <tr>    
                                                                                         <th>CGST (9 %):</th>
-                                                                                        <td>1000</td>
+                                                                                        <td>
+                                                                                            <input type="text" name="cgst" value = "CGST 9%">
+                                                                                        </td>   
                                                                                     </tr>
                                                                                     <tr>    
                                                                                         <th>Total Bil Amount :</th>
-                                                                                        <td>1000</td>
+                                                                                        <td>
+                                                                                            <input type="text" name="total" value = "10000">
+                                                                                        </td>   
                                                                                     </tr>
                                                                                 
                                                                                 </tbody>
                                                                             </table>
+                                                                        </div>
+                                                                        <div>
+                                                                            <a href=""><button type="submit" style="width: 70px;">Save</button></a>
+                                                                            <a href="#"><button type="submit" style="width: 90px;">Preview</button></a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -291,7 +282,7 @@
                                             
                                         </script>
 
-                                         <script>
+                                         <!-- <script>
                                             function deleteRow(row) {
 
 
@@ -327,7 +318,7 @@
                                             
                                             }
                                         </script>  
-
+ -->
 
                                         <script>
                                             $('#date').val(new Date().toJSON().slice(0,10));
@@ -358,6 +349,21 @@
                                             }
                                             
                                         </script>
+                                        <!-- $(document).ready(function()
+                                        {
+                                            $('tr').each(function(){
+                                                var totamount = 0;
+                                                $(this).find('.amt'),each(function(){
+                                                    var amout=$(this).text();
+                                                    if(amout.length!==0)
+                                                    {
+                                                        totamount+=parseFloat(amout);
+                                                    }
+                                                });
+                                                $(this).find('#totamount').html(totamount);
+                                            });
+                                        }); -->
+                                        
 
                                         <script>
                                             $("#question-subject").change(function () {
@@ -365,7 +371,7 @@
                                                 console.log(subjectId)
                                                 $.ajax({                       // initialize an AJAX request
                                                     type: "POST",
-                                                    url: '/get_topics_ajax/',
+                                                    url: '/get_items_ajax/',
                                                     data: {
                                                         'item_id': subjectId,       // add the country id to the POST parameters
                                                         'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
@@ -377,7 +383,8 @@
                                                             var rowCount = table.rows.length;
                                                             var row = table.insertRow(rowCount);
                                                             var colCount = table.rows[0].cells.length;
-                                                            for(var i=0; i<colCount; i++) {
+                                                            console.log(colCount);
+                                                            for(var i=0; i<colCount-1; i++) {
                                                                 var newcell = row.insertCell(i);
                                                                 newcell.innerHTML = table.rows[0].cells[i].innerHTML;
                                                                 newcell.childNodes[0].id = "txt"+rowCount;
@@ -391,28 +398,58 @@
                                                                             <td style="height:10px;width:195px">${data[0].item_description}</td>
                                                                             <td style="height:10px;width:195px">${data[0].model_name}</td>
                                                                             <td style="height:10px;width:190px">${data[0].Ampear}</td>
-                                                                            <td style="height:10px;width:195px">${data[0].Quantity}</td>
+                                                                            <td style="height:10px;width:195px">${data[0].Quantity}
+                                                                            </td>
                                                                             <td style="height:10px;width:188px"><span class="wpcf10-form-control-wrap eon-black-qty">
-                                                                                <input type="number" name="eon-black-qty" value="" style="width:190px; height:70px;!important" min="0" max="9999" aria-invalid="false">
+                                                                            <a href = "#"><input type="number" name="item_quntity" id = "totl"  value="${data[0].id}" style="width:190px; height:70px;!important" min="0" max="9999" aria-invalid="false">
+
                                                                             </span></td>
                                                                             <td style="height:10px;width:195PX">${data[0].DP_price}</td>
                                                                             <td style="height:10px;width:158px"><span class="wpcf10-form-control-wrap eon-black-qty">
-                                                                                <input type="number" name="eon-black-qty" value="" style="width:168px; height:70px;!important" min="0" max="9999" aria-invalid="false">
-                                                                            </span></td>
+                                                                                <input type="text" id="totamount" name="total" value="{{sum}}" style="width:158px; height:70px;!important" min="0" max="9999" aria-invalid="false">
+                                                                                </span>
+                                                                            </td>
+                                                                            
+
+                                                                            
                                                                             
                                                                             
                                                                         </tr>`);
                                                                    
-                                                                }
+                                                                        }
                                                                 
-                                                            }
+                                                                    }
 
 
                                                                 }
                                                             });
                                                         });
                                         </script>
+                                                                                                                                                                                                                
 
+                                        
+                                        
+                                       
+                                        <script>
+                                            $("#totl").change(function () {
+                                                const dataID = $(this).val();  // get the selected subject ID from the HTML dropdown list 
+                                                console.log(dataID)
+                                                $.ajax({                       // initialize an AJAX request
+                                                    type: "POST",
+                                                    url: '/get_sum/',
+                                                    data: {
+                                                        'dataID': dataID,       // add the country id to the POST parameters
+                                                        'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+                                                    },
+                                                    success: function (data) {   // `data` is from `get_topics_ajax` view function
+                                                       // replace the contents of the topic input with the data that came from the server
+                                                        console.log(data);
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                       
+                                       
                                         <script>
                                             $("#dealerinfo").change(function () {
                                                 const dealinfo = $(this).val();  // get the selected subject ID from the HTML dropdown list 

@@ -304,52 +304,93 @@ def Invoice_View(request):
     allinvoice = INVOICE_MASTER.objects.all()
     return render(request,"Invoice_View.html",{'allinvoice':allinvoice})
 
+def create_invoice(request):
+        invoice_a = "INV"
+        invoice_b = "2122"
+        invoice_c = ' '.join([str(random.randint(0, 999)).zfill(6) for _ in range(1)])
+        Invoice_no = invoice_a + invoice_b + invoice_c
+        
+        lid = Login_Master.objects.get(id = request.session['id'])
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",lid)
+        c_id = Company_Master.objects.filter(id = lid.Company_id_id)
+        
+        print("@@@@@@@@@@@",c_id)
+        d_id = Dealer_Master.objects.filter(Company_id_id = lid.Company_id_id)
+        print("```````````````````````````````````````````````",d_id)
+
+        alldealer = Dealer_Master.objects.filter(IsDeleted='0')
+        # allcustomer = Dealer_Master.objects.filter(IsDeleted='0',IsDealer='0')
+        # print("allcustomer :-  ",allcustomer)
+        allitem= Item_Master.objects.filter(IsDeleted = '0')
+        print("tid  :-   ",allitem)
+        
+        for i in allitem:
+            print(i)
+        
+        today = date.today()
+        d1 = today.strftime("%b. %d, %Y")
+        due_date = today + timedelta(days=15)
+        Due_Date =due_date.strftime("%Y-%m-%d")
+        return render(request,'invoicetest.html',{'allitem':allitem,'c_id':c_id,'lid':lid,'d_id':d_id,'d1':d1,'Due_Date':Due_Date,'alldealer':alldealer,'Invoice_no':Invoice_no}) 
+
 def invoice_file(request):
-    invoice_a = "INV"
-    invoice_b = "2122"
-    invoice_c = ' '.join([str(random.randint(0, 999)).zfill(6) for _ in range(1)])
-    Invoice_no = invoice_a + invoice_b + invoice_c
+    if request.method == "POST":
+       in_no = request.POST['Invoice_Number']
+    #    print("in_no :------------------------------------------------------------------------------",in_no)
+       in_date = request.POST['invoice_date']
+       in_duedate = request.POST['Invoice_Due_Date']
+       dealer = request.POST['dealer']
+       print("dealer")
+       in_total = request.POST['total']
+       in_sgst = request.POST['sgst']
+       item_quntity = request.POST['item_quntity']
+    #    price = request.POST['DP_price']
+       
+       print("quantity ==================================================",item_quntity)     
+    #    print("price ==================================================",price)       
+       
+    #    sum = int(item_quntity) * int(price)
+    #    print("sum :===============================================",sum)
+       INVOICE_MASTER.objects.create(InvoiceNo=in_no,InvoiceDate=in_date,InvoiceDueDate=in_duedate,TotalAmount=in_total,TotalTax=in_sgst,CreatedBy = "dhruvisha",CreatedDate = "2022-1-1",ModifiedBy = "dhruvisha",ModifiedDate = "2022-1-1",DealerId_id = dealer)
+    #    IN = INVOICE_DETAILS.objects.create(Quantity=item_quntity)
+    #    print("invoice_details :!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",IN)
+       
+       
+       return redirect("/invoice_file/")
+       
+def get_sum(request,pk):
+    if request.method == "POST":
+        dataID = request.POST['dataID']
+        itm= Item_Master.objects.get(id=pk)
+        print("itm----------------------------",itm)
+        # price = request.POST['DP_price']
+        
+        print("itemid :-------------------",dataID)
+        # print("price :--------------",price)
+        try:
+            subject = Item_Master.objects.filter(id = dataID)
+            print("subject:-------------",subject)
+            for i in subject:
+                print("i :----------",i)
+                price = i.DP_price
+                print("price :------------",price)
+                qty = i.user_qty
+                print("qty :-----------",qty)
+                totamount = price * qty   
+        except Exception:
+            print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            data['error_message'] = 'error'
+            return JsonResponse(data)
+        return JsonResponse(list(subject.values()), safe = False) 
     
-    # last_invoice = INVOICE_MASTER.objects.get(InvoiceNo).last()
-    # if not last_invoice:
-    #      return 'MAG0001'
-    # invoice_no = last_invoice.invoice_no
-    # invoice_int = int(invoice_no.split('INV')[-1])
-    # new_invoice_int = invoice_int + 1
-    # new_invoice_no = 'INV' + '2122' + str(new_invoice_int)
-    # print("new_invoice_no-----------------------",new_invoice_test)
-
-
-
-    lid = Login_Master.objects.get(id = request.session['id'])
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",lid)
-    c_id = Company_Master.objects.filter(id = lid.Company_id_id)
-    
-    print("@@@@@@@@@@@",c_id)
-    d_id = Dealer_Master.objects.filter(Company_id_id = lid.Company_id_id)
-    print("```````````````````````````````````````````````",d_id)
-
-    alldealer = Dealer_Master.objects.filter(IsDeleted='0',IsDealer='1')
-    allcustomer = Dealer_Master.objects.filter(IsDeleted='0',IsDealer='0')
-    print("allcustomer :-  ",allcustomer)
-    allitem= Item_Master.objects.filter(IsDeleted = '0')
-    print("tid  :-   ",allitem)
-    
-    for i in allitem:
-        print(i)
-    
-    today = date.today()
-    d1 = today.strftime("%b. %d, %Y")
-    due_date = today + timedelta(days=15)
-    Due_Date =due_date.strftime("%Y-%m-%d")
-    return render(request,'invoicetest.html',{'allitem':allitem,'c_id':c_id,'lid':lid,'d_id':d_id,'d1':d1,'Due_Date':Due_Date,'alldealer':alldealer,'allcustomer':allcustomer,'Invoice_no':Invoice_no}) 
-
-def get_topics_ajax(request):
+       
+       
+def get_items_ajax(request):
     if request.method == "POST":
         item_id = request.POST['item_id']
+        print("itemid :------------------",item_id)
         try:
             subject = Item_Master.objects.filter(id = item_id)
-
             for i in subject:
                 name=i.item_name
 
@@ -374,7 +415,6 @@ def dealerinformation(request):
             return JsonResponse(data)
         return JsonResponse(list(info.values('id','dealer_company_name','dealre_name','dealer_address','gst_number','dealer_email_address','dealer_phone_number','dealer_office_number')), safe = False)
         
-        
 def customerinformation(request):
     if request.method == "POST":
         custinfo_id = request.POST['custinfo']
@@ -387,6 +427,39 @@ def customerinformation(request):
             data['error_message'] = 'error'
             return JsonResponse(data)
         return JsonResponse(list(info.values('id','dealer_company_name','dealre_name','dealer_address','gst_number','dealer_email_address','dealer_phone_number','dealer_office_number')), safe = False)
+
 # def save_invoice(request):
 #     if request.method== "POST":
 #         =request.POST.get('')
+
+
+def xyz(request):
+        invoice_a = "INV"
+        invoice_b = "2122"
+        invoice_c = ' '.join([str(random.randint(0, 999)).zfill(6) for _ in range(1)])
+        Invoice_no = invoice_a + invoice_b + invoice_c
+        
+        lid = Login_Master.objects.get(id = request.session['id'])
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",lid)
+        c_id = Company_Master.objects.filter(id = lid.Company_id_id)
+        
+        print("@@@@@@@@@@@",c_id)
+        d_id = Dealer_Master.objects.filter(Company_id_id = lid.Company_id_id)
+        print("```````````````````````````````````````````````",d_id)
+
+        alldealer = Dealer_Master.objects.filter(IsDeleted='0')
+        # allcustomer = Dealer_Master.objects.filter(IsDeleted='0',IsDealer='0')
+        # print("allcustomer :-  ",allcustomer)
+        allitem= Item_Master.objects.filter(IsDeleted = '0')
+        print("tid  :-   ",allitem)
+        
+        for i in allitem:
+            print(i)
+        
+        today = date.today()
+        d1 = today.strftime("%b. %d, %Y")
+        due_date = today + timedelta(days=15)
+        Due_Date =due_date.strftime("%Y-%m-%d")
+        
+        return render(request,'test.html',{'allitem':allitem,'c_id':c_id,'lid':lid,'d_id':d_id,'d1':d1,'Due_Date':Due_Date,'alldealer':alldealer,'Invoice_no':Invoice_no}) 
+    # return render(request,"test.html")

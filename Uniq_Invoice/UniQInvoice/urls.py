@@ -18,7 +18,7 @@ urlpatterns = [
     
     path('select_profile/',views.select_profile, name= "select_profile"),
     path('view_profile/',views.view_profile, name= "view_profile"),
-    path('create_invoice/',views.create_invoice, name= "create_invoice"),
+   
     # path('invoice_file/',views.invoice_file, name= "invoice_file"),
     
     

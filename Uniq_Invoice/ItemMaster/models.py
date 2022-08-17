@@ -95,3 +95,20 @@ class INVOICE_DETAILS(models.Model):
     Quantity = models.IntegerField(null = True)
     Rate = models.IntegerField(null=True)
     ItemServiceNo = models.IntegerField(null = True)
+    
+    
+class PAYMENT_MASTER(models.Model):
+    Invoice_Id=models.ForeignKey(INVOICE_MASTER, on_delete=models.CASCADE, null = False)
+    Dealer_Id= models.ForeignKey(Dealer_Master, on_delete=models.CASCADE, null = False)
+    Payment_Id=models.CharField(max_length=50, null = False)
+    Amount=models.IntegerField(null = False)
+    Payment_Date=models.DateField(auto_now=False, auto_now_add=False, null = False)
+    
+
+
+class PAYMENT_STATUS_MASTER(models.Model):
+    Invoice_Id=models.ForeignKey(INVOICE_MASTER, on_delete=models.CASCADE, null = False)
+    Status = models.CharField( max_length=200 ,default="PENDING")
+    Total_Amount=models.IntegerField(null = False)
+    Received_Amount=models.IntegerField(null = False)
+    Full_Payment_Received_Date=models.DateField(auto_now=False, auto_now_add=False, null = False)
